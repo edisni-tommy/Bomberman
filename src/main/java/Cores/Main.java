@@ -1,0 +1,76 @@
+package Cores;
+
+import Entities.Player.Player;
+import Input.PlayerInput;
+import com.jme3.app.SimpleApplication;
+import com.jme3.asset.AssetManager;
+import com.jme3.asset.plugins.FileLocator;
+import com.jme3.input.InputManager;
+import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
+import com.jme3.scene.Node;
+import com.jme3.system.AppSettings;
+
+import Input.SystemInput;
+import com.jme3.ui.Picture;
+import org.lwjgl.openal.AL10;
+
+import java.io.FileNotFoundException;
+
+public class Main extends SimpleApplication {
+
+    public static final int HEIGHT = 720;
+    public static final int WIDTH = 1080;
+    public static AppSettings APP_SETTINGS;
+    public static Node ROOT_NODE;
+    public static Node GUI_NODE;
+    public static AssetManager ASSET_MANAGER;
+    public static InputManager INPUT_MANAGER;
+    public static Camera CAM;
+    public static Main APP;
+
+    public static void main(String[] argv) {
+        APP = new Main();
+        APP_SETTINGS = new AppSettings(true);
+        APP_SETTINGS.setFrameRate(60);
+        APP_SETTINGS.setHeight(HEIGHT);
+        APP_SETTINGS.setWidth(WIDTH);
+        APP_SETTINGS.setTitle("Bomberman");
+        APP_SETTINGS.setVSync(true);
+        APP_SETTINGS.setFrameRate(60);
+        APP.setSettings(APP_SETTINGS);
+        APP.setDisplayStatView(false);
+        APP.setShowSettings(false);
+        APP.start();
+
+
+    }
+
+    @Override
+    public void simpleInitApp() {
+        AL10.alSourcef(1, AL10.AL_GAIN, 5f);
+        ROOT_NODE = rootNode;
+        INPUT_MANAGER = inputManager;
+        ASSET_MANAGER = assetManager;
+        GUI_NODE = guiNode;
+        CAM = cam;
+        flyCam.setEnabled(true);
+        assetManager.registerLocator("assets", FileLocator.class);
+        GameEnvironment.initalize();
+        try {
+            Map.initalize();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        SystemInput.initalize();
+        PlayerInput.initalize();
+
+    }
+
+    @Override
+    public void simpleUpdate(float tpf) {
+
+
+    }
+
+}
