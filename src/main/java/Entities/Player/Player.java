@@ -1,6 +1,7 @@
 package Entities.Player;
 
 import Cores.Map;
+import Entities.Bomb;
 import Entities.Entity;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.math.FastMath;
@@ -15,10 +16,17 @@ import java.awt.desktop.SystemEventListener;
 
 public class Player extends Entity {
 
+    private final float checkSize = 0.5f;
+
     protected final float DEFAULT_SPEED = 3.0f;
     protected float speed = DEFAULT_SPEED;
+    protected boolean isShield = false;
+    protected final int DEFAULT_BOMB = 3;
+    protected int bombLeft = 3;
+    protected float hasShield = 0f;
+    protected int DEFAULT_FLAME = 3;
+    protected int flame = 3;
 
-    private final float checkSize = 0.5f;
 
     public Player(Vector3f position, String path) {
         super(position, path);
@@ -100,6 +108,19 @@ public class Player extends Entity {
             return;
         } else {
             this.setPosition(new Vector3f(currentX, currentPosition.y, currentZ + tpf * speed));
+        }
+    }
+
+    public void setBomb() {
+        if (bombLeft == 0) {
+            return;
+        }
+        bombLeft --;
+        Vector2f position = getCord();
+        int x = (int)position.x;
+        int y = (int)position.y;
+        if (Map.getObject(x, y) == null) {
+            Map.setObject(x, y, new Bomb(new Vector3f(x * 2f, 1, y * 2f)));
         }
     }
 

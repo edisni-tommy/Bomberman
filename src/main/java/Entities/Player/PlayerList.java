@@ -1,5 +1,7 @@
 package Entities.Player;
 
+import Cores.Main;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,12 @@ public class PlayerList {
         playerList.remove(player);
     }
 
-    public static Player getPlayer() {
-        return playerList.get(0);
+    public static Player getMainPlayer() {
+        for (Player player: playerList) {
+            if (player instanceof MainPlayer) {
+                return player;
+            }
+        }
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package Cores;
 
+import Entities.BombList;
 import Entities.Player.Player;
 import Input.PlayerInput;
 import com.jme3.app.SimpleApplication;
@@ -64,12 +65,11 @@ public class Main extends SimpleApplication {
         }
         SystemInput.initalize();
         PlayerInput.initalize();
-
     }
 
     @Override
     public void simpleUpdate(float tpf) {
-
+        BombList.onUpdate(tpf);
 
     }
 

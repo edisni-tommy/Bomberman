@@ -15,21 +15,27 @@ public class PlayerInput {
     private static Player player;
 
     public static void initalize() {
-        player = new Player(new Vector3f(2f, 1, 2f), "Models/Player/player.gltf");
-        ChaseCamera chaseCam = new ChaseCamera(Main.CAM, player.getSpatital(), Main.INPUT_MANAGER);
-        chaseCam.setDefaultHorizontalRotation(FastMath.PI);
-        chaseCam.setDefaultVerticalRotation(FastMath.PI/3);
-        chaseCam.setDefaultDistance(16);
-        chaseCam.setMinDistance(10);
-        chaseCam.setMaxDistance(20);
-        chaseCam.setZoomSensitivity(0.25f);
-        chaseCam.cleanupWithInput(Main.INPUT_MANAGER);
+        player = PlayerList.getMainPlayer();
         Main.INPUT_MANAGER.addMapping("Forward", new KeyTrigger(KeyInput.KEY_W));
         Main.INPUT_MANAGER.addMapping("Backward", new KeyTrigger(KeyInput.KEY_S));
         Main.INPUT_MANAGER.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
         Main.INPUT_MANAGER.addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
+        Main.INPUT_MANAGER.addMapping("setBomb", new KeyTrigger(KeyInput.KEY_SPACE));
+        Main.INPUT_MANAGER.addListener(actionListener, "setBomb");
         Main.INPUT_MANAGER.addListener(analogListener, "Forward", "Backward", "Left", "Right");
     }
+
+    private static final ActionListener actionListener = new ActionListener() {
+        @Override
+        public void onAction(String s, boolean keyPressed, float v) {
+            if (keyPressed) {
+                if (s == "setBomb") {
+                    player.setBomb();
+                }
+            }
+        }
+    };
+
     private static final AnalogListener analogListener = new AnalogListener() {
         @Override
         public void onAnalog(String s, float b, float v) {
