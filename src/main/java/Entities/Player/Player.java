@@ -114,12 +114,12 @@ public class Player extends Entity {
         if (bombLeft == 0) {
             return;
         }
-        bombLeft --;
+        //bombLeft --;
         Vector2f position = getCord();
         int x = (int)position.x;
         int y = (int)position.y;
         if (Map.getObject(x, y) == null) {
-            Map.setObject(x, y, new Bomb(new Vector3f(x * 2f, 1, y * 2f)));
+            Map.setObject(x, y, new Bomb(new Vector3f(x * 2f, 1, y * 2f), flame));
         }
     }
 

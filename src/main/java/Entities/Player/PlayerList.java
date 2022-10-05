@@ -16,6 +16,10 @@ public class PlayerList {
         playerList.remove(player);
     }
 
+    public static List<Player> getList() {
+        return playerList;
+    }
+
     public static Player getMainPlayer() {
         for (Player player: playerList) {
             if (player instanceof MainPlayer) {

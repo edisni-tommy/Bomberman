@@ -11,6 +11,7 @@ import com.jme3.math.Vector3f;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -60,7 +61,8 @@ public class Map {
     }
 
     public static boolean isBlocked(int i, int j) {
-        return (map[i][j] == '*' || map[i][j] == '#');
+        Entity current = getObject(i, j);
+        return (current instanceof Container || current instanceof Rock);
     }
 
     public static Entity getObject(int x, int y) {

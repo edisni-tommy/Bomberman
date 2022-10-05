@@ -22,8 +22,8 @@ public class PlayerInput {
         Main.INPUT_MANAGER.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
         Main.INPUT_MANAGER.addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
         Main.INPUT_MANAGER.addMapping("setBomb", new KeyTrigger(KeyInput.KEY_SPACE));
-        Main.INPUT_MANAGER.addListener(actionListener, "setBomb");
-        Main.INPUT_MANAGER.addListener(analogListener, "Forward", "Backward", "Left", "Right");
+        //Main.INPUT_MANAGER.addListener(actionListener, );
+        Main.INPUT_MANAGER.addListener(analogListener, "Forward", "Backward", "Left", "Right", "setBomb");
     }
 
     private static final ActionListener actionListener = new ActionListener() {
@@ -52,6 +52,9 @@ public class PlayerInput {
                     break;
                 case "Right":
                     player.moveRight(v);
+                    break;
+                case "setBomb":
+                    player.setBomb();
                     break;
             }
         }
