@@ -1,6 +1,7 @@
 package Input;
 
 import Cores.Main;
+import Entities.Player.MainPlayer;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
 import com.jme3.input.ChaseCamera;
@@ -12,10 +13,10 @@ import com.jme3.math.Vector3f;
 
 public class PlayerInput {
 
-    private static Player player;
+    private static MainPlayer player;
 
     public static void initalize() {
-        player = PlayerList.getMainPlayer();
+        player = (MainPlayer)PlayerList.getMainPlayer();
         Main.INPUT_MANAGER.addMapping("Forward", new KeyTrigger(KeyInput.KEY_W));
         Main.INPUT_MANAGER.addMapping("Backward", new KeyTrigger(KeyInput.KEY_S));
         Main.INPUT_MANAGER.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));

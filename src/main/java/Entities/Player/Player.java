@@ -33,7 +33,6 @@ public class Player extends Entity {
         Light.setSpatialLight(spatial);
         spatial.setModelBound(new BoundingBox());
         spatial.updateModelBound();
-        PlayerList.add(this);
     }
 
     public Spatial getSpatital() {
