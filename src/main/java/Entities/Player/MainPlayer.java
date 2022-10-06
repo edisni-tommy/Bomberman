@@ -4,10 +4,12 @@ import Cores.Main;
 import com.jme3.input.ChaseCamera;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
+import UI.PlayerStatus.BombStatusBar;
 
 public class MainPlayer extends Player {
     public MainPlayer(Vector3f position) {
         super(position, "Models/Player/player.gltf");
+        bombStatusBar = new BombStatusBar(super.spatial, bombMax, bombLeft);
         ChaseCamera chaseCam = new ChaseCamera(Main.CAM, spatial, Main.INPUT_MANAGER);
         chaseCam.setDefaultHorizontalRotation(FastMath.PI);
         chaseCam.setDefaultVerticalRotation(FastMath.PI/3);

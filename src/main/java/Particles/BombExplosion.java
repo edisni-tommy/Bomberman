@@ -13,19 +13,21 @@ public class BombExplosion {
     private final long startTime;
     public BombExplosion(Vector3f position) {
         explosion = new ParticleEmitter("explosion effect", ParticleMesh.Type.Triangle, 15);
-        Material mat_red = new Material(Main.ASSET_MANAGER,
-                "Common/MatDefs/Misc/Particle.j3md");
-        mat_red.setTexture("Texture", Main.ASSET_MANAGER.loadTexture(
-                "Textures/Particles/bomb_explode.png"));
+        Material mat_red = new Material(Main.ASSET_MANAGER, "Common/MatDefs/Misc/Particle.j3md");
+        mat_red.setTexture("Texture", Main.ASSET_MANAGER.loadTexture("Effects/Flame/flame.png"));
         explosion.setMaterial(mat_red);
+        explosion.setImagesX(2);
+        explosion.setImagesY(2);
         explosion.setLocalTranslation(position);
         explosion.getLocalTranslation().addLocal(0, 1.35f, 0.4f);
-        explosion.setStartColor(new ColorRGBA(1f, 1f, 0.1f, 1f));
-        explosion.setEndColor(new ColorRGBA(1f, 0.1f, 0.1f, 1f));
-        explosion.setStartSize(0.5f);
-        explosion.setEndSize(0.2f);
-        explosion.setLowLife(0.3f);
-        explosion.setHighLife(0.4f);
+        explosion.setStartColor(new ColorRGBA(1f, 1f, 0f, 0.5f));
+        explosion.setEndColor(new ColorRGBA(1f, 0f, 0f, 1f));
+        explosion.setStartSize(1f);
+        explosion.setEndSize(0.1f);
+        explosion.setGravity(0, 0, 0);
+        explosion.setLowLife(1f);
+        explosion.setHighLife(3f);
+        explosion.getParticleInfluencer().setVelocityVariation(0.3f);
         explosion.emitAllParticles();
         startTime = System.currentTimeMillis();
         Main.ROOT_NODE.attachChild(explosion);

@@ -14,6 +14,7 @@ public class PlayerList {
 
     public static void remove(Player player) {
         playerList.remove(player);
+        player.remove();
     }
 
     public static List<Player> getList() {
@@ -27,5 +28,11 @@ public class PlayerList {
             }
         }
         return null;
+    }
+
+    public static void onUpdate(float tpf) {
+        for (Player player: playerList) {
+            player.onUpdate(tpf);
+        }
     }
 }

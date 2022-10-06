@@ -3,6 +3,7 @@ package Entities.Player;
 import Cores.Map;
 import Entities.Bomb;
 import Entities.Entity;
+import UI.PlayerStatus.BombStatusBar;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
@@ -10,8 +11,6 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
 import utils.Light;
-
-import java.awt.desktop.SystemEventListener;
 
 
 public class Player extends Entity {
@@ -22,17 +21,23 @@ public class Player extends Entity {
     protected float speed = DEFAULT_SPEED;
     protected boolean isShield = false;
     protected final int DEFAULT_BOMB = 3;
-    protected int bombLeft = 3;
+    protected int bombLeft = DEFAULT_BOMB;
+    protected int bombMax = DEFAULT_BOMB;
     protected float hasShield = 0f;
     protected int DEFAULT_FLAME = 3;
     protected int flame = 3;
 
+    protected final float DEFAULT_COOLDOWN_BOMB = 4.0f;
+    protected float currentCooldownBomb = 0f;
+
+    protected BombStatusBar bombStatusBar;
 
     public Player(Vector3f position, String path) {
         super(position, path);
         Light.setSpatialLight(spatial);
         spatial.setModelBound(new BoundingBox());
         spatial.updateModelBound();
+        //bombStatusBar = new BombStatusBar(spatial, bombCurrent, bombLeft, DEFAULT_COOLDOWN_BOMB, currentCooldownBomb);
     }
 
     public Spatial getSpatital() {
@@ -114,11 +119,12 @@ public class Player extends Entity {
         if (bombLeft == 0) {
             return;
         }
-        //bombLeft --;
+
         Vector2f position = getCord();
         int x = (int)position.x;
         int y = (int)position.y;
         if (Map.getObject(x, y) == null) {
+            bombLeft -= 1;
             Map.setObject(x, y, new Bomb(new Vector3f(x * 2f, 1, y * 2f), flame));
         }
     }
@@ -131,6 +137,19 @@ public class Player extends Entity {
 
     private boolean invalid(float x) {
         return x < 0f || x > 39.0f;
+    }
+
+    public void onUpdate(float tpf) {
+        currentCooldownBomb -= tpf;
+        if (bombLeft == bombMax) {
+            currentCooldownBomb = DEFAULT_COOLDOWN_BOMB;
+            return;
+        }
+        if (currentCooldownBomb <= 0) {
+            ++ bombLeft;
+            currentCooldownBomb = DEFAULT_COOLDOWN_BOMB;
+        }
+        bombStatusBar.onUpdate(bombLeft, bombMax, currentCooldownBomb);
     }
 
 }

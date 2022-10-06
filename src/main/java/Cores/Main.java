@@ -2,6 +2,7 @@ package Cores;
 
 import Entities.BombList;
 import Entities.Player.Player;
+import Entities.Player.PlayerList;
 import Input.PlayerInput;
 import Particles.BombExplosionList;
 import com.jme3.app.SimpleApplication;
@@ -70,6 +71,7 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
+        PlayerList.onUpdate(tpf);
         BombList.onUpdate(tpf);
         BombExplosionList.onUpdate(tpf);
     }
