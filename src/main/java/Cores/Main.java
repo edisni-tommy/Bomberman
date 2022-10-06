@@ -68,12 +68,6 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
-<<<<<<< HEAD
-        PlayerList.onUpdate(tpf);
-        BombList.onUpdate(tpf);
-        BombExplosionList.onUpdate(tpf);
-=======
         ScenceGraphController.update(tpf);
->>>>>>> ffe04c60764a935c5fbd290aebcbee2ecb643380
     }
 }

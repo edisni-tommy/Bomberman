@@ -22,4 +22,8 @@ public class ScenceGraphController {
             scence.update(tpf);
         }
     }
+
+    public static void setPause(boolean pause) {
+        scence.setDisplayed(pause);
+    }
 }

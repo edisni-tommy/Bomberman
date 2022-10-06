@@ -152,4 +152,8 @@ public class Player extends Entity {
         bombStatusBar.onUpdate(bombLeft, bombMax, currentCooldownBomb);
     }
 
+    public void remove() {
+        bombStatusBar.remove();
+        super.remove();
+    }
 }

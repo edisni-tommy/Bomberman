@@ -40,7 +40,7 @@ public class MainMenu extends ScenceGraph {
             @Override
             public void isSelected() {
                 setDisplayed(false);
-                ScenceGraphController.setScence(new InGame());
+                ScenceGraphController.setScence(new InGame(1));
             }
         };
         exit = new Button(new Vector2f(440,300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "EXIT") {
