@@ -3,6 +3,7 @@ package Cores;
 import Entities.BombList;
 import Entities.Player.Player;
 import Input.PlayerInput;
+import Particles.BombExplosionList;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 import com.jme3.asset.plugins.FileLocator;
@@ -70,7 +71,7 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleUpdate(float tpf) {
         BombList.onUpdate(tpf);
-
+        BombExplosionList.onUpdate(tpf);
     }
 
 }
