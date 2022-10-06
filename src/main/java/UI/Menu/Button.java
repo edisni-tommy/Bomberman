@@ -16,7 +16,6 @@ public class Button extends Image {
     public Button(Vector2f pos, Vector2f size, String path, String text) {
         super(pos, size, path);
         this.text = new Text(text, ColorRGBA.Black, pos, size);
-        Main.INPUT_MANAGER.removeListener(actionListener);
         Main.INPUT_MANAGER.addListener(actionListener, "LeftClick");
     }
 
@@ -28,6 +27,7 @@ public class Button extends Image {
 
     @Override
     public void remove() {
+        Main.INPUT_MANAGER.removeListener(actionListener);
         super.remove();
         text.remove();
     }
@@ -41,11 +41,13 @@ public class Button extends Image {
                 }
             }
         }
+
     };
 
     public void isSelected() {
 
     }
+
     public boolean isInside(Vector2f cursor) {
         if (cursor.x < getPosX() || cursor.x > getPosX() + getWidth()) return false;
         if (cursor.y < getPosY() || cursor.y > getPosY() + getHeight()) return false;

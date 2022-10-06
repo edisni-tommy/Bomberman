@@ -28,7 +28,7 @@ public class SystemInput {
             if(b) {
                 switch (s) {
                     case "LeftClick":
-
+                        break;
                 }
             }
         }

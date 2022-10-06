@@ -18,7 +18,7 @@ public class ScenceGraphController {
     }
 
     public static void update(float tpf) {
-        if (scence != null && scence.isDisplayed()) {
+        if (scence != null && scence. isDisplayed()) {
             scence.update(tpf);
         }
     }

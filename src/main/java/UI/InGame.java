@@ -1,4 +1,4 @@
-package UI.Menu;
+package UI;
 
 import Cores.GameEnvironment;
 import Cores.Map;
