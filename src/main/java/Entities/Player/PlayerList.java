@@ -17,6 +17,13 @@ public class PlayerList {
         player.remove();
     }
 
+    public static void removeAll() {
+        List<Player> removeList = new ArrayList<>(playerList);
+        for (Player player: removeList) {
+            remove(player);
+        }
+    }
+
     public static List<Player> getList() {
         return playerList;
     }

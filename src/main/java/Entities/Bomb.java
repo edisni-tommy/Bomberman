@@ -6,6 +6,8 @@ import Entities.Player.Player;
 import Entities.Player.PlayerList;
 import Entities.Terrain.Container;
 import Particles.BombExplosion;
+import UI.ScenceGraph;
+import UI.ScenceGraphController;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
@@ -81,7 +83,7 @@ public class Bomb extends Entity {
         for (Player player: removeList) {
             PlayerList.remove(player);
             if (player instanceof MainPlayer) {
-                System.out.println("Player died");
+                ScenceGraphController.setPause(true);
             }
         }
     }

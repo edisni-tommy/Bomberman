@@ -1,8 +1,10 @@
 package Cores;
 
+import Entities.BombList;
 import Entities.Entity;
 import Entities.Player.MainPlayer;
 import Entities.Player.Player;
+import Entities.Player.PlayerList;
 import Entities.Terrain.Container;
 import Entities.Terrain.Grass;
 import Entities.Terrain.Rock;
@@ -16,16 +18,20 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Map {
-    private static char[][] map = new char[20][20];
-    private static Entity[][] entity = new Entity[20][20];
+    private static char[][] map;
+    private static Entity[][] entity ;
 
-    public static void initalize() throws FileNotFoundException {
+    public static void initalize(int level) throws FileNotFoundException {
+        map = new char[20][20];
+        entity = new Entity[20][20];
         for (int i = 0; i < 20; ++ i) {
             for (int j = 0; j < 20; ++ j) {
                 Grass grass = new Grass(new Vector3f(i * 2f, 0, j * 2f));
             }
         }
-        loadMapFromFile("assets/Level/level1.txt");
+        PlayerList.removeAll();
+        BombList.removeAll();
+        loadMapFromFile("assets/Level/level" + level + ".txt");
     }
 
     public static void loadMapFromFile(String path) throws FileNotFoundException {
