@@ -4,6 +4,9 @@ import Entities.BombList;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
 import Input.PlayerInput;
+import UI.Menu.MainMenu;
+import UI.ScenceGraph;
+import UI.ScenceGraphController;
 import Particles.BombExplosionList;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
@@ -45,8 +48,6 @@ public class Main extends SimpleApplication {
         APP.setDisplayStatView(false);
         APP.setShowSettings(false);
         APP.start();
-
-
     }
 
     @Override
@@ -57,23 +58,22 @@ public class Main extends SimpleApplication {
         ASSET_MANAGER = assetManager;
         GUI_NODE = guiNode;
         CAM = cam;
-        flyCam.setEnabled(true);
+        flyCam.setEnabled(false);
+        //flyCam.setDragToRotate(true);
         assetManager.registerLocator("assets", FileLocator.class);
-        GameEnvironment.initalize();
-        try {
-            Map.initalize();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         SystemInput.initalize();
         PlayerInput.initalize();
+        ScenceGraphController.setScence(new MainMenu());
     }
 
     @Override
     public void simpleUpdate(float tpf) {
+<<<<<<< HEAD
         PlayerList.onUpdate(tpf);
         BombList.onUpdate(tpf);
         BombExplosionList.onUpdate(tpf);
+=======
+        ScenceGraphController.update(tpf);
+>>>>>>> ffe04c60764a935c5fbd290aebcbee2ecb643380
     }
-
 }

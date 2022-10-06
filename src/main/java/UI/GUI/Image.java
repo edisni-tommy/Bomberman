@@ -3,7 +3,6 @@ package UI.GUI;
 import Cores.Main;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import com.jme3.texture.Texture;
 import com.jme3.ui.Picture;
 
 public class Image extends Item {
