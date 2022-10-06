@@ -23,7 +23,6 @@ public class BombList {
                 removeList.add(bomb);
             }
         }
-
         for (Bomb bomb: removeList) {
             remove(bomb);
         }
