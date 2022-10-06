@@ -3,13 +3,10 @@ package Cores;
 import Entities.BombList;
 import Entities.Player.Player;
 import Input.PlayerInput;
-<<<<<<< HEAD
 import UI.Menu.MainMenu;
 import UI.ScenceGraph;
 import UI.ScenceGraphController;
-=======
 import Particles.BombExplosionList;
->>>>>>> 1050e30c6567f4537ba7e32c4e89bd7f8dc78322
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 import com.jme3.asset.plugins.FileLocator;
@@ -70,11 +67,6 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
-<<<<<<< HEAD
         ScenceGraphController.update(tpf);
-=======
-        BombList.onUpdate(tpf);
-        BombExplosionList.onUpdate(tpf);
->>>>>>> 1050e30c6567f4537ba7e32c4e89bd7f8dc78322
     }
 }
