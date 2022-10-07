@@ -2,7 +2,9 @@ package Entities.Player;
 
 import Cores.Main;
 import Cores.Map;
+import Entities.BuffItem.BombExtend;
 import Entities.BuffItem.FlameBuff;
+import Entities.BuffItem.ShieldBuff;
 import Entities.BuffItem.SpeedBuff;
 import Entities.Entity;
 import com.jme3.input.ChaseCamera;
@@ -65,6 +67,12 @@ public class MainPlayer extends Player {
             Map.remove((int)position.x, (int)position.y);
         } else if (buffItem instanceof FlameBuff) {
             setFlameBuff();
+            Map.remove((int)position.x, (int)position.y);
+        } else if (buffItem instanceof BombExtend) {
+            setBombExtend();
+            Map.remove((int)position.x, (int)position.y);
+        } else if (buffItem instanceof ShieldBuff) {
+            setShieldBuff();
             Map.remove((int)position.x, (int)position.y);
         }
     }

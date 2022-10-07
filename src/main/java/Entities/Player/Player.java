@@ -17,23 +17,27 @@ public class Player extends Entity {
 
     private final float checkSize = 0.5f;
 
+    private final float DEFAUT_BUFF_DURATION = 10.0f;
     private final float DEFAULT_SPEED = 3.0f;
     private float speed = DEFAULT_SPEED;
     private float speedBuffDuration = 0f;
-    private final float DEFAULT_SPEEDBUFF_DURATION = 10.0f;
 
-    private final int DEFAULT_BOMB = 3;
-    protected int bombLeft = DEFAULT_BOMB;
-    protected int bombMax = DEFAULT_BOMB;
     protected final float DEFAULT_COOLDOWN_BOMB = 4.0f;
     protected float currentCooldownBomb = 0f;
 
-    private boolean isShield = false;
-    private float hasShield = 0f;
     private final int DEFAULT_FLAME = 3;
     private int flame = DEFAULT_FLAME;
-    private final float DEFAULT_FLAMEBUFF_DURATION = 10.0f;
     private float flameBuffDuration = 0f;
+
+    private boolean isShield = false;
+    private float shieldBuffDuration = 0f;
+
+    private float bombExtendDuration = 0f;
+    private final int DEFFAULT_BOMB_CARRY = 3;
+    protected int bombLeft = DEFFAULT_BOMB_CARRY;
+    protected int bombMax = DEFFAULT_BOMB_CARRY;
+
+
 
 
 
@@ -151,6 +155,8 @@ public class Player extends Entity {
         onCooldownBomb(tpf);
         onSpeedEffect(tpf);
         onFlameEffect(tpf);
+        onShieldEffect(tpf);
+        onBombExtend(tpf);
         bombStatusBar.onUpdate(bombLeft, bombMax, currentCooldownBomb);
     }
 
@@ -181,13 +187,39 @@ public class Player extends Entity {
         }
     }
 
+    public void onBombExtend(float tpf) {
+        this.bombExtendDuration -= tpf;
+        if(this.bombExtendDuration <= 0) {
+            this.bombMax = DEFFAULT_BOMB_CARRY;
+        }
+        this.bombLeft = Math.min(this.bombMax, this.bombLeft);
+    }
+
+    public void onShieldEffect(float tpf) {
+        this.shieldBuffDuration -= tpf;
+        this.isShield = true;
+        if (this.shieldBuffDuration <= 0) {
+            this.isShield = false;
+        }
+    }
+
 
     public void setSpeedBuff() {
-        this.speedBuffDuration = DEFAULT_SPEEDBUFF_DURATION;
+        this.speedBuffDuration = DEFAUT_BUFF_DURATION;
     }
 
     public void setFlameBuff() {
-        this.flameBuffDuration = DEFAULT_FLAMEBUFF_DURATION;
+        this.flameBuffDuration = DEFAUT_BUFF_DURATION;
+    }
+
+    public void setBombExtend() {
+        this.bombExtendDuration = DEFAUT_BUFF_DURATION;
+        this.bombMax = DEFFAULT_BOMB_CARRY + 1;
+        this.bombLeft = Math.min(this.bombMax, this.bombLeft + 1);
+    }
+
+    public void setShieldBuff() {
+        this.shieldBuffDuration = DEFAUT_BUFF_DURATION;
     }
 
     public void remove() {
