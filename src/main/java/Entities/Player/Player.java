@@ -17,18 +17,25 @@ public class Player extends Entity {
 
     private final float checkSize = 0.5f;
 
-    protected final float DEFAULT_SPEED = 3.0f;
-    protected float speed = DEFAULT_SPEED;
-    protected boolean isShield = false;
-    protected final int DEFAULT_BOMB = 3;
+    private final float DEFAULT_SPEED = 3.0f;
+    private float speed = DEFAULT_SPEED;
+    private float speedBuffDuration = 0f;
+    private final float DEFAULT_SPEEDBUFF_DURATION = 10.0f;
+
+    private final int DEFAULT_BOMB = 3;
     protected int bombLeft = DEFAULT_BOMB;
     protected int bombMax = DEFAULT_BOMB;
-    protected float hasShield = 0f;
-    protected int DEFAULT_FLAME = 3;
-    protected int flame = 3;
-
     protected final float DEFAULT_COOLDOWN_BOMB = 4.0f;
     protected float currentCooldownBomb = 0f;
+
+    private boolean isShield = false;
+    private float hasShield = 0f;
+    private final int DEFAULT_FLAME = 3;
+    private int flame = DEFAULT_FLAME;
+    private final float DEFAULT_FLAMEBUFF_DURATION = 10.0f;
+    private float flameBuffDuration = 0f;
+
+
 
     protected BombStatusBar bombStatusBar;
 
@@ -141,6 +148,13 @@ public class Player extends Entity {
     }
 
     public void onUpdate(float tpf) {
+        onCooldownBomb(tpf);
+        onSpeedEffect(tpf);
+        onFlameEffect(tpf);
+        bombStatusBar.onUpdate(bombLeft, bombMax, currentCooldownBomb);
+    }
+
+    public void onCooldownBomb(float tpf) {
         currentCooldownBomb -= tpf;
         if (bombLeft == bombMax) {
             currentCooldownBomb = DEFAULT_COOLDOWN_BOMB;
@@ -150,7 +164,30 @@ public class Player extends Entity {
             ++ bombLeft;
             currentCooldownBomb = DEFAULT_COOLDOWN_BOMB;
         }
-        bombStatusBar.onUpdate(bombLeft, bombMax, currentCooldownBomb);
+    }
+
+    public void onSpeedEffect(float tpf) {
+        this.speedBuffDuration -= tpf;
+        this.speed = DEFAULT_SPEED * 1.5f;
+        if (this.speedBuffDuration <= 0) {
+            this.speed = DEFAULT_SPEED;
+        }
+    }
+    public void onFlameEffect(float tpf) {
+        this.flameBuffDuration -= tpf;
+        this.flame = DEFAULT_FLAME + 1;
+        if (this.flameBuffDuration <= 0) {
+            this.flame = DEFAULT_FLAME;
+        }
+    }
+
+
+    public void setSpeedBuff() {
+        this.speedBuffDuration = DEFAULT_SPEEDBUFF_DURATION;
+    }
+
+    public void setFlameBuff() {
+        this.flameBuffDuration = DEFAULT_FLAMEBUFF_DURATION;
     }
 
     public void remove() {

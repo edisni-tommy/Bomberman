@@ -68,6 +68,11 @@ public class Map {
         }
     }
 
+    public static void remove(int x, int y) {
+        entity[x][y].remove();
+        entity[x][y] = null;
+    }
+
     public static boolean isBlocked(int i, int j) {
         Entity current = getObject(i, j);
         return (current != null && current.isBlocked());

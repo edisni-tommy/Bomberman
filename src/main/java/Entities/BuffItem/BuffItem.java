@@ -22,6 +22,7 @@ public abstract class BuffItem extends Entity {
     }
 
     public void remove() {
+        super.remove();
         BuffItemList.remove(this);
     }
 }

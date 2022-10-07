@@ -1,8 +1,13 @@
 package Entities.Player;
 
 import Cores.Main;
+import Cores.Map;
+import Entities.BuffItem.FlameBuff;
+import Entities.BuffItem.SpeedBuff;
+import Entities.Entity;
 import com.jme3.input.ChaseCamera;
 import com.jme3.math.FastMath;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import UI.PlayerStatus.BombStatusBar;
 
@@ -20,9 +25,48 @@ public class MainPlayer extends Player {
         bombStatusBar.onUpdate(bombMax, bombLeft, 0f);
     }
 
+    @Override
+    public void moveForward(float tpf) {
+        super.moveForward(tpf);
+        checkBuffItem();
+    }
+
+    @Override
+    public void moveBackward(float tpf) {
+        super.moveBackward(tpf);
+        checkBuffItem();
+    }
+
+    @Override
+    public void moveLeft(float tpf) {
+        super.moveLeft(tpf);
+        checkBuffItem();
+    }
+
+    @Override
+    public void moveRight(float tpf) {
+        super.moveRight(tpf);
+        checkBuffItem();
+    }
+
     public void remove() {
         super.remove();
         bombStatusBar.remove();
+    }
+
+    public void checkBuffItem() {
+        Vector2f position = getCord();
+        Entity buffItem = Map.getObject((int)position.x, (int)position.y);
+        if (buffItem == null) {
+            return;
+        }
+        if (buffItem instanceof SpeedBuff) {
+            setSpeedBuff();
+            Map.remove((int)position.x, (int)position.y);
+        } else if (buffItem instanceof FlameBuff) {
+            setFlameBuff();
+            Map.remove((int)position.x, (int)position.y);
+        }
     }
 
 }
