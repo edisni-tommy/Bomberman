@@ -22,4 +22,9 @@ public class GameEnvironment {
         Main.ROOT_NODE.addLight(light);
         Main.ROOT_NODE.attachChild(sky);
     }
+
+    public static void remove() {
+        Main.ROOT_NODE.removeLight(light);
+        Main.ROOT_NODE.detachChild(sky);
+    }
 }

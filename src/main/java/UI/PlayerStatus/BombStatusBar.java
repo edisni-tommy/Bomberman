@@ -10,35 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BombStatusBar extends PlayerStatus {
-    private Image background = new Image(new Vector2f(60f, 15f), "Textures/Bar/Status/background.png");
-    private Image border = new Image(new Vector2f(60f, 15f), "Textures/Bar/Status/border.png");
-
-    private int currentBomb;
-    private int maxBomb;
-    private float currentCooldown;
-    private List<Image> fill = new ArrayList<>();
-    private List<Image> part = new ArrayList<>();
+    private static Image background = new Image(new Vector2f(60f, 15f), "Textures/Bar/Status/background.png");
+    private static Image border = new Image(new Vector2f(60f, 15f), "Textures/Bar/Status/border.png");
+    private static List<Image> fill = new ArrayList<>();
+    private static List<Image> part = new ArrayList<>();
     public BombStatusBar(Spatial link, int currentBomb, int maxBomb) {
         super(link);
-        this.currentBomb = currentBomb;
-        this.maxBomb = maxBomb;
-        this.currentCooldown = 0;
-        Vector3f position = getPosition();
-        float x = position.x - 30;
-        float y = position.y;
-        float z = position.z;
-        background.setPos(new Vector3f(x, y, z));
-        border.setPos(new Vector3f(x, y, z));
-        for (int i = 0; i < currentBomb; ++ i) {
-            Image filled = new Image(new Vector2f(60f/maxBomb, 15f), "Textures/Bar/Status/fill.png");
-            filled.setPos(new Vector3f(x + (60f/maxBomb) * i, y, z));
-            fill.add(filled);
-        }
-        for (int i = 0; i < maxBomb; ++ i) {
-            Image p = new Image(new Vector2f(60f/maxBomb, 15f), "Textures/Bar/Status/part.png");
-            p.setPos(new Vector3f(x + (60f/maxBomb) * i, y, z));
-            fill.add(p);
-        }
+        onUpdate(currentBomb, maxBomb, 0f);
         show();
     }
 
@@ -51,21 +29,19 @@ public class BombStatusBar extends PlayerStatus {
         for (Image image: part) {
             image.remove();
         }
+        fill.clear();
+        part.clear();
     }
 
-    public void onUpdate(int currentBomb, int maxBomb, float currentCoolDown) {
+    public void onUpdate(int currentBomb, int maxBomb, float currentCooldown) {
+        super.onUpdate();
         remove();
-        this.currentBomb = currentBomb;
-        this.maxBomb = maxBomb;
-        this.currentCooldown = currentCoolDown;
-        fill.removeAll(fill);
-        part.removeAll(part);
         Vector3f position = getPosition();
-        float x = position.x - 30;
+        float x = position.x;
         float y = position.y;
         float z = position.z;
-        background.setPos(new Vector3f(x, y, z));
-        border.setPos(new Vector3f(x, y, z));
+        background.setPos(position);
+        border.setPos(position);
         for (int i = 0; i < currentBomb; ++ i) {
             Image filled = new Image(new Vector2f(60f/maxBomb, 15f), "Textures/Bar/Status/fill.png");
             filled.setPos(new Vector3f(x + (60f/maxBomb) * i, y, z));

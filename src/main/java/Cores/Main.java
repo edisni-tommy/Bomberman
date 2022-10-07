@@ -62,7 +62,7 @@ public class Main extends SimpleApplication {
         //flyCam.setDragToRotate(true);
         assetManager.registerLocator("assets", FileLocator.class);
         SystemInput.initalize();
-        PlayerInput.initalize();
+        //PlayerInput.initalize();
         ScenceGraphController.setScence(new MainMenu());
     }
 

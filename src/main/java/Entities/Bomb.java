@@ -6,6 +6,7 @@ import Entities.Player.Player;
 import Entities.Player.PlayerList;
 import Entities.Terrain.Container;
 import Particles.BombExplosion;
+import UI.Menu.MainMenu;
 import UI.ScenceGraph;
 import UI.ScenceGraphController;
 import com.jme3.math.Vector2f;
@@ -66,7 +67,7 @@ public class Bomb extends Entity {
         }
 
         for (int i = y; i > Math.max(-1, y - flame); -- i) {
-            checkKillPlayer(x, y);
+            checkKillPlayer(x, i);
             if (checkExplorsion(x, i)) {
                 break;
             }
@@ -83,7 +84,7 @@ public class Bomb extends Entity {
         for (Player player: removeList) {
             PlayerList.remove(player);
             if (player instanceof MainPlayer) {
-                ScenceGraphController.setPause(true);
+                ScenceGraphController.setScence(new MainMenu());
             }
         }
     }

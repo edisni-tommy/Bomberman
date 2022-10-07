@@ -7,6 +7,7 @@ import Entities.Player.PlayerList;
 import Input.PlayerInput;
 import Input.SystemInput;
 import Particles.BombExplosionList;
+import UI.PlayerStatus.BombStatusBar;
 import UI.ScenceGraph;
 
 import java.io.FileNotFoundException;
@@ -38,6 +39,10 @@ public class InGame extends ScenceGraph {
 
     @Override
     public void remove() {
+        PlayerList.removeAll();
+        BombList.removeAll();
+        BombExplosionList.removeAll();
+        GameEnvironment.remove();
         setDisplayed(false);
     }
 }

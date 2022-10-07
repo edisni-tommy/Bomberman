@@ -18,10 +18,7 @@ public class PlayerList {
     }
 
     public static void removeAll() {
-        List<Player> removeList = new ArrayList<>(playerList);
-        for (Player player: removeList) {
-            remove(player);
-        }
+        playerList.clear();
     }
 
     public static List<Player> getList() {

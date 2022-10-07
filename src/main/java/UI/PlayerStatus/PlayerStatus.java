@@ -10,11 +10,15 @@ public class PlayerStatus {
 
     public PlayerStatus(Spatial link) {
         this.link = link;
-        position = Main.CAM.getScreenCoordinates(link.getWorldTranslation());
+        position = Main.CAM.getScreenCoordinates(this.link.getWorldTranslation());
+        position.x -= 30;
+        position.y += 70;
     }
 
     public void onUpdate() {
-        position = Main.CAM.getScreenCoordinates(link.getLocalTranslation());
+        position = Main.CAM.getScreenCoordinates(this.link.getWorldTranslation());
+        position.x -= 30;
+        position.y += 70;
     }
 
     public Spatial getLink() {

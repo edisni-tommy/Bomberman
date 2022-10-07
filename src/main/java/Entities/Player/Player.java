@@ -34,14 +34,15 @@ public class Player extends Entity {
 
     public Player(Vector3f position, String path) {
         super(position, path);
+        PlayerList.add(this);
         Light.setSpatialLight(spatial);
         spatial.setModelBound(new BoundingBox());
         spatial.updateModelBound();
-        //bombStatusBar = new BombStatusBar(spatial, bombCurrent, bombLeft, DEFAULT_COOLDOWN_BOMB, currentCooldownBomb);
+        bombStatusBar = new BombStatusBar(spatial, bombMax, bombLeft);
     }
 
     public Spatial getSpatital() {
-        return spatial;
+        return super.spatial;
     }
     public void moveForward(float tpf) {
         Rotate(0);
@@ -153,7 +154,6 @@ public class Player extends Entity {
     }
 
     public void remove() {
-        bombStatusBar.remove();
         super.remove();
     }
 }

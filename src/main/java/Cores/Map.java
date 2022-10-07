@@ -29,8 +29,6 @@ public class Map {
                 Grass grass = new Grass(new Vector3f(i * 2f, 0, j * 2f));
             }
         }
-        PlayerList.removeAll();
-        BombList.removeAll();
         loadMapFromFile("assets/Level/level" + level + ".txt");
     }
 

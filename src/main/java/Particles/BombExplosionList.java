@@ -15,6 +15,10 @@ public class BombExplosionList {
         bombExplosion.remove();
     }
 
+    public static void removeAll() {
+        bombExplosionList.clear();
+    }
+
     public static void onUpdate(float tpf) {
         List<BombExplosion> removeList = new ArrayList<>();
         for (BombExplosion bombExplosion: bombExplosionList) {

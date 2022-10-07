@@ -18,10 +18,7 @@ public class BombList {
     }
 
     public static void removeAll() {
-        List<Bomb> removeList = new ArrayList<>(bombList);
-        for (Bomb bomb: removeList) {
-            remove(bomb);
-        }
+        bombList.clear();
     }
 
     public static void onUpdate(float tpf) {

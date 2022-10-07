@@ -9,7 +9,6 @@ import UI.PlayerStatus.BombStatusBar;
 public class MainPlayer extends Player {
     public MainPlayer(Vector3f position) {
         super(position, "Models/Player/player.gltf");
-        bombStatusBar = new BombStatusBar(super.spatial, bombMax, bombLeft);
         ChaseCamera chaseCam = new ChaseCamera(Main.CAM, spatial, Main.INPUT_MANAGER);
         chaseCam.setDefaultHorizontalRotation(FastMath.PI);
         chaseCam.setDefaultVerticalRotation(FastMath.PI/3);
@@ -18,6 +17,13 @@ public class MainPlayer extends Player {
         chaseCam.setMaxDistance(20);
         chaseCam.setZoomSensitivity(0.25f);
         chaseCam.cleanupWithInput(Main.INPUT_MANAGER);
-        PlayerList.add(this);
+        bombStatusBar.remove();
+        bombStatusBar = new BombStatusBar(super.getSpatital(), bombMax, bombLeft);
     }
+
+    public void remove() {
+        super.remove();
+        bombStatusBar.remove();
+    }
+
 }

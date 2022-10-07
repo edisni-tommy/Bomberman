@@ -2,14 +2,10 @@ package Input;
 
 import Cores.Main;
 import Entities.Player.MainPlayer;
-import Entities.Player.Player;
 import Entities.Player.PlayerList;
-import com.jme3.input.ChaseCamera;
 import com.jme3.input.KeyInput;
-import com.jme3.input.MouseInput;
 import com.jme3.input.controls.*;
-import com.jme3.math.FastMath;
-import com.jme3.math.Vector3f;
+
 
 public class PlayerInput {
 
@@ -22,15 +18,15 @@ public class PlayerInput {
         Main.INPUT_MANAGER.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
         Main.INPUT_MANAGER.addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
         Main.INPUT_MANAGER.addMapping("setBomb", new KeyTrigger(KeyInput.KEY_SPACE));
-        //Main.INPUT_MANAGER.addListener(actionListener, );
-        Main.INPUT_MANAGER.addListener(analogListener, "Forward", "Backward", "Left", "Right", "setBomb");
+        Main.INPUT_MANAGER.addListener(actionListener, "Forward", "Backward", "Left", "Right", "setBomb");
+        Main.INPUT_MANAGER.addListener(analogListener, "Forward", "Backward", "Left", "Right");
     }
 
     private static final ActionListener actionListener = new ActionListener() {
         @Override
         public void onAction(String s, boolean keyPressed, float v) {
             if (keyPressed) {
-                if (s == "setBomb") {
+                if (s.equals("setBomb")) {
                     player.setBomb();
                 }
             }
@@ -52,9 +48,6 @@ public class PlayerInput {
                     break;
                 case "Right":
                     player.moveRight(v);
-                    break;
-                case "setBomb":
-                    player.setBomb();
                     break;
             }
         }
