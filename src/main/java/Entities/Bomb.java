@@ -1,6 +1,8 @@
 package Entities;
 
+import Cores.Main;
 import Cores.Map;
+import Entities.BuffItem.*;
 import Entities.Player.MainPlayer;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
@@ -11,9 +13,11 @@ import UI.ScenceGraph;
 import UI.ScenceGraphController;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Bomb extends Entity {
 
@@ -27,6 +31,11 @@ public class Bomb extends Entity {
 
     public void onUpdate(float tpf) {
         timeExplore -= tpf;
+        Vector2f mainPlayerCord =((MainPlayer) PlayerList.getMainPlayer()).getCord();
+        Vector2f position = getCord();
+        if (position.x != mainPlayerCord.x || position.y != mainPlayerCord.y) {
+            setBlocked(true);
+        }
     }
 
     public boolean isExplored() {
@@ -94,11 +103,36 @@ public class Bomb extends Entity {
         Entity cur = Map.getObject(x, y);
         if (cur != null) {
             if (cur instanceof Container) {
-                Map.setObject(x, y, null);
                 cur.remove();
+                Map.setObject(x, y, randomEntity(x, y));
             }
             return true;
         }
         return false;
+    }
+
+    private Entity randomEntity(int x, int y) {
+        if (!Map.isHasPortal()) {
+            int rand = (int) (Math.random() * Container.getCount());
+            if(rand == 1) {
+                System.out.println(1);
+                Map.setHasPortal(true);
+                return null;
+            }
+        }
+        int rand = (int) (Math.random() * 10);
+        switch (rand) {
+            case 0:
+                return new BombExtend(new Vector3f(x * 2f, 1, y * 2f));
+            case 1:
+                return new FlameBuff(new Vector3f(x * 2f, 1, y * 2f));
+            case 2:
+                return new ShieldBuff(new Vector3f(x * 2f, 1, y * 2f));
+            case 3:
+                return new SpeedBuff(new Vector3f(x * 2f, 1, y * 2f));
+            default:
+                return null;
+
+        }
     }
 }

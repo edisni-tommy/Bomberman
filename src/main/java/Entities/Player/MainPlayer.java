@@ -17,8 +17,7 @@ public class MainPlayer extends Player {
         chaseCam.setMaxDistance(20);
         chaseCam.setZoomSensitivity(0.25f);
         chaseCam.cleanupWithInput(Main.INPUT_MANAGER);
-        bombStatusBar.remove();
-        bombStatusBar = new BombStatusBar(super.getSpatital(), bombMax, bombLeft);
+        bombStatusBar.onUpdate(bombMax, bombLeft, 0f);
     }
 
     public void remove() {

@@ -12,5 +12,6 @@ public class Rock extends Entity {
         //Light.setSpatialLight(spatial);
         spatial.setModelBound(new BoundingBox());
         spatial.updateModelBound();
+        setBlocked(true);
     }
 }

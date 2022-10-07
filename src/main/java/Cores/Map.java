@@ -19,9 +19,13 @@ import java.util.Vector;
 
 public class Map {
     private static char[][] map;
-    private static Entity[][] entity ;
+    private static Entity[][] entity;
+
+    private static boolean hasPortal;
+
 
     public static void initalize(int level) throws FileNotFoundException {
+        hasPortal = false;
         map = new char[20][20];
         entity = new Entity[20][20];
         for (int i = 0; i < 20; ++ i) {
@@ -66,7 +70,7 @@ public class Map {
 
     public static boolean isBlocked(int i, int j) {
         Entity current = getObject(i, j);
-        return (current instanceof Container || current instanceof Rock);
+        return (current != null && current.isBlocked());
     }
 
     public static Entity getObject(int x, int y) {
@@ -75,5 +79,12 @@ public class Map {
 
     public static void setObject(int x, int y, Entity obj) {
         entity[x][y] = obj;
+    }
+
+    public static void setHasPortal(boolean newHasPortal) {
+        hasPortal = newHasPortal;
+    }
+    public static boolean isHasPortal() {
+        return hasPortal;
     }
 }
