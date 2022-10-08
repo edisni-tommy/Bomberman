@@ -7,6 +7,7 @@ import Entities.BuffItem.FlameBuff;
 import Entities.BuffItem.ShieldBuff;
 import Entities.BuffItem.SpeedBuff;
 import Entities.Entity;
+import Entities.Terrain.Portal;
 import com.jme3.input.ChaseCamera;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
@@ -30,24 +31,28 @@ public class MainPlayer extends Player {
     @Override
     public void moveForward(float tpf) {
         super.moveForward(tpf);
+        checkPortal();
         checkBuffItem();
     }
 
     @Override
     public void moveBackward(float tpf) {
         super.moveBackward(tpf);
+        checkPortal();
         checkBuffItem();
     }
 
     @Override
     public void moveLeft(float tpf) {
         super.moveLeft(tpf);
+        checkPortal();
         checkBuffItem();
     }
 
     @Override
     public void moveRight(float tpf) {
         super.moveRight(tpf);
+        checkPortal();
         checkBuffItem();
     }
 
@@ -74,6 +79,19 @@ public class MainPlayer extends Player {
         } else if (buffItem instanceof ShieldBuff) {
             setShieldBuff();
             Map.remove((int)position.x, (int)position.y);
+        }
+    }
+
+    public void checkPortal() {
+        Vector2f position = getCord();
+        Entity entity = Map.getObject((int)position.x, (int)position.y);
+        if (entity == null) {
+            return;
+        }
+        if (entity instanceof Portal) {
+            if (Player.countEnemy == 0) {
+                //win
+            }
         }
     }
 

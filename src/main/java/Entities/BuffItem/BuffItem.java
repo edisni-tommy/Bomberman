@@ -38,6 +38,7 @@ public abstract class BuffItem extends Entity {
 
     public void remove() {
         super.remove();
+        Main.ROOT_NODE.detachChild(shadow);
         BuffItemList.remove(this);
     }
 }

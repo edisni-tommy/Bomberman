@@ -6,7 +6,7 @@ import com.jme3.scene.Spatial;
 
 public class PlayerStatus {
     private final Spatial link;
-    private Vector3f position;
+    protected Vector3f position;
 
     public PlayerStatus(Spatial link) {
         this.link = link;

@@ -4,6 +4,7 @@ import Cores.Map;
 import Entities.Bomb;
 import Entities.Entity;
 import UI.PlayerStatus.BombStatusBar;
+import UI.PlayerStatus.ShieldStatus;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
@@ -37,11 +38,10 @@ public class Player extends Entity {
     protected int bombLeft = DEFFAULT_BOMB_CARRY;
     protected int bombMax = DEFFAULT_BOMB_CARRY;
 
-
-
-
-
     protected BombStatusBar bombStatusBar;
+    protected ShieldStatus shieldStatus;
+
+    protected static int countEnemy = 0;
 
     public Player(Vector3f position, String path) {
         super(position, path);
@@ -50,6 +50,7 @@ public class Player extends Entity {
         spatial.setModelBound(new BoundingBox());
         spatial.updateModelBound();
         bombStatusBar = new BombStatusBar(spatial, bombMax, bombLeft);
+        shieldStatus = new ShieldStatus(spatial, false);
     }
 
     public Spatial getSpatital() {
@@ -158,6 +159,7 @@ public class Player extends Entity {
         onShieldEffect(tpf);
         onBombExtend(tpf);
         bombStatusBar.onUpdate(bombLeft, bombMax, currentCooldownBomb);
+        shieldStatus.onUpdate(isShield);
     }
 
     public void onCooldownBomb(float tpf) {

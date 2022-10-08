@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BombStatusBar extends PlayerStatus {
-    private static Image background = new Image(new Vector2f(60f, 15f), "Textures/Bar/Status/background.png");
-    private static Image border = new Image(new Vector2f(60f, 15f), "Textures/Bar/Status/border.png");
-    private static List<Image> fill = new ArrayList<>();
-    private static List<Image> part = new ArrayList<>();
+    private static final Image background = new Image(new Vector2f(60f, 15f), "Textures/Bar/Status/background.png");
+    private static final Image border = new Image(new Vector2f(60f, 15f), "Textures/Bar/Status/border.png");
+    private static final List<Image> fill = new ArrayList<>();
+    private static final List<Image> part = new ArrayList<>();
     public BombStatusBar(Spatial link, int currentBomb, int maxBomb) {
         super(link);
         onUpdate(currentBomb, maxBomb, 0f);
