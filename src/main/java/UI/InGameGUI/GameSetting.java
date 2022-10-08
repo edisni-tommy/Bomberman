@@ -1,5 +1,6 @@
 package UI.InGameGUI;
 
+import Cores.Main;
 import Input.PlayerInput;
 import UI.Menu.Button;
 import UI.Menu.Image;
@@ -7,6 +8,8 @@ import UI.Menu.MainMenu;
 import UI.ScenceGraph;
 import UI.ScenceGraphController;
 import com.jme3.math.Vector2f;
+
+import java.awt.*;
 
 public class GameSetting extends ScenceGraph {
     private static Image background;

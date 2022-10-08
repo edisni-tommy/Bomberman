@@ -21,6 +21,7 @@ import Input.SystemInput;
 import com.jme3.ui.Picture;
 import org.lwjgl.openal.AL10;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 
 public class Main extends SimpleApplication {
