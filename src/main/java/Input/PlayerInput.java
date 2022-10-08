@@ -13,6 +13,7 @@ import com.jme3.input.controls.*;
 public class PlayerInput {
 
     private static MainPlayer player;
+    private static boolean active;
 
     public static void initialize() {
         player = (MainPlayer)PlayerList.getMainPlayer();
@@ -30,6 +31,9 @@ public class PlayerInput {
     private static final ActionListener actionListener = new ActionListener() {
         @Override
         public void onAction(String s, boolean keyPressed, float v) {
+            if (!PlayerInput.isActive()) {
+                return;
+            }
             if (keyPressed) {
                 if (s.equals("setBomb")) {
                     player.setBomb();
@@ -45,6 +49,9 @@ public class PlayerInput {
     private static final AnalogListener analogListener = new AnalogListener() {
         @Override
         public void onAnalog(String s, float b, float v) {
+            if (!PlayerInput.isActive()) {
+                return;
+            }
             switch (s) {
                 case "Forward":
                     player.moveForward(v);
@@ -60,7 +67,14 @@ public class PlayerInput {
                     break;
             }
         }
-
     };
+
+    public static void setActive(boolean newActive) {
+        active = newActive;
+    }
+
+    public static boolean isActive() {
+        return active;
+    }
 
 }

@@ -20,6 +20,7 @@ public class Defeat extends ScenceGraph {
     }
 
     public void initialize(int level) {
+        Main.GUI_NODE.detachAllChildren();
         background = new Image(new Vector2f(380, 260), new Vector2f(360,240), "Textures/Menu/Lobby-Background.png");
         home = new Button(new Vector2f(460, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Home"){
             @Override

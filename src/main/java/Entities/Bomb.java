@@ -29,7 +29,12 @@ public class Bomb extends Entity {
 
     public void onUpdate(float tpf) {
         timeExplore -= tpf;
-        Vector2f mainPlayerCord =((MainPlayer) PlayerList.getMainPlayer()).getCord();
+        MainPlayer mainPlayer =(MainPlayer) PlayerList.getMainPlayer();
+        if (mainPlayer == null) {
+            setBlocked(true);
+            return;
+        }
+        Vector2f mainPlayerCord = mainPlayer.getCord();
         Vector2f position = getCord();
         if (position.x != mainPlayerCord.x || position.y != mainPlayerCord.y) {
             setBlocked(true);
