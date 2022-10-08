@@ -7,7 +7,7 @@ import com.jme3.math.Vector2f;
 
 public class Button extends Image {
     private Text text;
-
+    private boolean On = true;
     public Button(Vector2f pos, Vector2f size, String path) {
         super(pos, size, path);
         Main.INPUT_MANAGER.addListener(actionListener, "LeftClick");
@@ -27,21 +27,23 @@ public class Button extends Image {
 
     @Override
     public void remove() {
-        Main.INPUT_MANAGER.removeListener(actionListener);
         super.remove();
         text.remove();
+        setOn(false);
     }
 
-    private final ActionListener actionListener = new ActionListener() {
-        @Override
-        public void onAction(String name, boolean keyPressed, float tpf) {
-            if (name.equals("LeftClick") && keyPressed) {
+    public void setOn(boolean on) {
+        On = on;
+    }
+
+    private final ActionListener actionListener = (name, keyPressed, tpf) -> {
+        if (On) {
+            if (keyPressed && name.equals("LeftClick")) {
                 if (isInside(Main.INPUT_MANAGER.getCursorPosition())) {
                     isSelected();
                 }
             }
         }
-
     };
 
     public void isSelected() {
@@ -50,7 +52,6 @@ public class Button extends Image {
 
     public boolean isInside(Vector2f cursor) {
         if (cursor.x < getPosX() || cursor.x > getPosX() + getWidth()) return false;
-        if (cursor.y < getPosY() || cursor.y > getPosY() + getHeight()) return false;
-        return true;
+        return !(cursor.y < getPosY()) && !(cursor.y > getPosY() + getHeight());
     }
 }

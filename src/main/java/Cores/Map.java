@@ -46,8 +46,8 @@ public class Map {
                 setObject(i, cnt, x);
                 ++ cnt;
             }
-
         }
+        IN.close();
     }
 
     private static void setObject(int i, int j, char x) {
