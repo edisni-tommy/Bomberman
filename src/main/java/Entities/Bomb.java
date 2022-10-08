@@ -7,6 +7,7 @@ import Entities.Player.MainPlayer;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
 import Entities.Terrain.Container;
+import Entities.Terrain.Portal;
 import Particles.BombExplosion;
 import UI.Menu.MainMenu;
 import UI.ScenceGraph;
@@ -115,9 +116,8 @@ public class Bomb extends Entity {
         if (!Map.isHasPortal()) {
             int rand = (int) (Math.random() * Container.getCount());
             if(rand == 1) {
-                System.out.println(1);
                 Map.setHasPortal(true);
-                return null;
+                return new Portal(new Vector3f(x * 2f, 1, y * 2f));
             }
         }
         int rand = (int) (Math.random() * 10);
