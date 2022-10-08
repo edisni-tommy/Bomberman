@@ -38,8 +38,8 @@ public abstract class Entity {
     }
 
     public Vector2f getPositionCord(float x, float z) {
-        int cordX = (int) ((x + Entity.BLOCK_SIZE / 2) / Entity.BLOCK_SIZE);
-        int cordZ = (int) ((z + Entity.BLOCK_SIZE / 2) / Entity.BLOCK_SIZE);
+        float cordX = (int) ((x + Entity.BLOCK_SIZE / 2) / Entity.BLOCK_SIZE);
+        float cordZ = (int) ((z + Entity.BLOCK_SIZE / 2) / Entity.BLOCK_SIZE);
         return new Vector2f(cordX, cordZ);
     }
 

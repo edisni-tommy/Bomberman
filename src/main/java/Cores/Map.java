@@ -2,6 +2,7 @@ package Cores;
 
 import Entities.BombList;
 import Entities.Entity;
+import Entities.Player.Enemies.EasyBot;
 import Entities.Player.MainPlayer;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
@@ -65,6 +66,8 @@ public class Map {
             case 'p':
                 Player player = new MainPlayer(new Vector3f(i * 2f, 1, j * 2f));
                 break;
+            case '1':
+                Player easyBot = new EasyBot(new Vector3f(i * 2f, 1, j * 2f));
         }
     }
 
@@ -91,5 +94,9 @@ public class Map {
     }
     public static boolean isHasPortal() {
         return hasPortal;
+    }
+
+    public static boolean valid(int x, int y) {
+        return 0 <= x && 0 <= y && 20 > x && 20 > y;
     }
 }
