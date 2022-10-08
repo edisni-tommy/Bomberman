@@ -1,6 +1,5 @@
 package Entities;
 
-import Cores.Main;
 import Cores.Map;
 import Entities.BuffItem.*;
 import Entities.Player.MainPlayer;
@@ -8,16 +7,14 @@ import Entities.Player.Player;
 import Entities.Player.PlayerList;
 import Entities.Terrain.Container;
 import Particles.BombExplosion;
-import UI.Menu.MainMenu;
-import UI.ScenceGraph;
+import UI.InGameGUI.Defeat;
+import UI.InGameGUI.InGame;
 import UI.ScenceGraphController;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Bomb extends Entity {
 
@@ -55,21 +52,21 @@ public class Bomb extends Entity {
         Map.setObject(x, y, null);
         for (int i = x; i < Math.min(20, x + flame); ++ i) {
             checkKillPlayer(i, y);
-            if (checkExplorsion(i, y)) {
+            if (checkExplosion(i, y)) {
                 break;
             }
         }
 
         for (int i = x; i > Math.max(-1, x - flame); -- i) {
             checkKillPlayer(i, y);
-            if (checkExplorsion(i, y)) {
+            if (checkExplosion(i, y)) {
                 break;
             }
         }
 
         for (int i = y; i < Math.min(20, y + flame); ++ i) {
             checkKillPlayer(x, i);
-            if (checkExplorsion(x, i)) {
+            if (checkExplosion(x, i)) {
                 break;
             }
 
@@ -77,7 +74,7 @@ public class Bomb extends Entity {
 
         for (int i = y; i > Math.max(-1, y - flame); -- i) {
             checkKillPlayer(x, i);
-            if (checkExplorsion(x, i)) {
+            if (checkExplosion(x, i)) {
                 break;
             }
         }
@@ -93,12 +90,12 @@ public class Bomb extends Entity {
         for (Player player: removeList) {
             PlayerList.remove(player);
             if (player instanceof MainPlayer) {
-                ScenceGraphController.setScence(new MainMenu());
+                ScenceGraphController.setExtension(new Defeat(InGame.getLevel()));
             }
         }
     }
 
-    private boolean checkExplorsion(int x, int y) {
+    private boolean checkExplosion(int x, int y) {
         BombExplosion bombExplosion = new BombExplosion(new Vector3f(x * 2f, 1, y * 2f));
         Entity cur = Map.getObject(x, y);
         if (cur != null) {

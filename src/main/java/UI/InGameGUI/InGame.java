@@ -1,21 +1,23 @@
-package UI;
+package UI.InGameGUI;
 
 import Cores.GameEnvironment;
+import Cores.Main;
 import Cores.Map;
 import Entities.BombList;
 import Entities.Player.PlayerList;
 import Input.PlayerInput;
 import Input.SystemInput;
 import Particles.BombExplosionList;
-import UI.PlayerStatus.BombStatusBar;
 import UI.ScenceGraph;
+import UI.ScenceGraphController;
 
 import java.io.FileNotFoundException;
 
 public class InGame extends ScenceGraph {
-    private int level;
+    private static int level;
     public InGame(int level) {
-        this.level = level;
+        InGame.level = level;
+        setDisplayed(true);
     }
     @Override
     public void update(float tpf) {
@@ -33,8 +35,8 @@ public class InGame extends ScenceGraph {
             throw new RuntimeException(e);
 
         }
-       // SystemInput.initalize();
-        PlayerInput.initalize();
+        SystemInput.initialize();
+        PlayerInput.initialize();
     }
 
     @Override
@@ -44,5 +46,9 @@ public class InGame extends ScenceGraph {
         BombExplosionList.removeAll();
         GameEnvironment.remove();
         setDisplayed(false);
+    }
+
+    public static int getLevel() {
+        return level;
     }
 }
