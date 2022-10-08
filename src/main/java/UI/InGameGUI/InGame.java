@@ -21,6 +21,9 @@ public class InGame extends ScenceGraph {
     }
     @Override
     public void update(float tpf) {
+        if (!isDisplayed()) {
+            return;
+        }
         PlayerList.onUpdate(tpf);
         BombList.onUpdate(tpf);
         BombExplosionList.onUpdate(tpf);
@@ -35,7 +38,7 @@ public class InGame extends ScenceGraph {
             throw new RuntimeException(e);
 
         }
-        SystemInput.initialize();
+        //SystemInput.initialize();
         PlayerInput.initialize();
     }
 
@@ -50,5 +53,10 @@ public class InGame extends ScenceGraph {
 
     public static int getLevel() {
         return level;
+    }
+
+    public void setDisplayed(boolean displayed) {
+        super.setDisplayed(displayed);
+        PlayerInput.setActive(displayed);
     }
 }

@@ -23,19 +23,21 @@ public class GameSetting extends ScenceGraph {
     }
 
     public void initialize() {
+        Main.GUI_NODE.detachAllChildren();
         background = new Image(new Vector2f(310, 150), new Vector2f(480,350), "Textures/Menu/Lobby-Background.png");
         home = new Button(new Vector2f(460, 400), new Vector2f(210, 80), "Textures/Menu/button_long.png", "BACK TO MENU"){
             @Override
             public void isSelected() {
                 ScenceGraphController.remove();
+                ScenceGraphController.removeExtension();
                 ScenceGraphController.setScence(new MainMenu());
             }
         };
         resume = new Button(new Vector2f(460, 300), new Vector2f(210, 80), "Textures/Menu/button_long.png", "RESUME GAME"){
             @Override
             public void isSelected() {
-                ScenceGraphController.setPause();
                 ScenceGraphController.removeExtension();
+                ScenceGraphController.setPause();
             }
         };
         restart = new Button(new Vector2f(460, 200), new Vector2f(210, 80), "Textures/Menu/button_long.png", "RESTART GAME") {
