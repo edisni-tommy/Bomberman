@@ -5,6 +5,7 @@ import Entities.BuffItem.BuffItem;
 import Entities.Entity;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
@@ -16,10 +17,12 @@ public class Enemy extends Player {
 
     private static final int[] dx = {1, -1, 0, 0};
     private static final int[] dy = {0, 0, 1, -1};
+    private boolean moving;
+    private Vector2f nextMove;
 
     public Enemy(Vector3f position, String path) {
         super(position, path);
-        speed = 1.0f;
+        this.speed = 1.0f;
         Player.countEnemy++;
         bombStatusBar.remove();
     }
@@ -44,7 +47,7 @@ public class Enemy extends Player {
 
         while (!q.isEmpty()) {
             Vector3f u = q.removeFirst();
-            if (u.z > distance) {
+            if (u.z >= distance) {
                 break;
             }
             for (int i = 0; i < 4; ++i) {
@@ -111,39 +114,33 @@ public class Enemy extends Player {
             current = trace[(int) current.x][(int) current.y];
         }
     }
+
     public Vector2f getTarget() {
         return this.target;
     }
 
     public void Move(Vector2f nextMove, float tpf) {
+        setMoving(true);
         Vector3f position = getPosition();
-        float slopeX = nextMove.x * 2f  - position.x;
-        float slopeY = nextMove.y * 2f  - position.z;
+        float slopeX = nextMove.x * 2f - position.x;
+        float slopeY = nextMove.y * 2f - position.z;
+        Vector2f next;
         if (slopeX > 0) {
-            Vector2f next = new Vector2f(position.x + speed * tpf, position.z);
-            if (next.x > nextMove.x * 2f) {
-                next.x = nextMove.x * 2f;
-            }
-            setPosition(new Vector3f(next.x, 1, next.y));
-
-        } else if(slopeX < 0){
-            Vector2f next = new Vector2f(position.x - speed * tpf, position.z);
-            if (next.x < nextMove.x * 2f) {
-                next.x = nextMove.x * 2f;
-            }
-            setPosition(new Vector3f(next.x, 1, next.y));
+            Rotate(-FastMath.PI/2);
+            next = new Vector2f(Math.min(position.x + speed * tpf, nextMove.x * 2f), position.z);
+        } else if (slopeX < 0) {
+            Rotate(FastMath.PI/2);
+            next = new Vector2f(Math.max(position.x - speed * tpf, nextMove.x * 2f), position.z);
         } else if (slopeY > 0) {
-            Vector2f next = new Vector2f(position.x, position.z + speed * tpf);
-            if (next.y > nextMove.y * 2f) {
-                next.y = nextMove.y * 2f;
-            }
-            setPosition(new Vector3f(next.x, 1, next.y));
+            Rotate(FastMath.PI);
+            next = new Vector2f(position.x, Math.min(position.z + speed * tpf, nextMove.y * 2f));
         } else {
-            Vector2f next = new Vector2f(position.x, position.z - speed * tpf);
-            if (next.y < nextMove.y * 2f) {
-                next.y = nextMove.y * 2f;
-            }
-            setPosition(new Vector3f(next.x, 1, next.y));
+            Rotate(0);
+            next = new Vector2f(position.x, Math.max(position.z - speed * tpf, nextMove.y * 2f));
+        }
+        setPosition(new Vector3f(next.x, 1, next.y));
+        if (getPosition().equals(new Vector3f(nextMove.x * 2f, 1, nextMove.y * 2f))) {
+            setMoving(false);
         }
     }
 
@@ -156,7 +153,7 @@ public class Enemy extends Player {
     }
 
     private boolean canMoveIn(int x, int y) {
-        for (Player player: PlayerList.getList()) {
+        for (Player player : PlayerList.getList()) {
             if (player instanceof Enemy) {
                 if (player.getCord().equals(new Vector2f(x, y))) {
                     return false;
@@ -167,13 +164,25 @@ public class Enemy extends Player {
     }
 
     public void onUpdate(float tpf) {
+        if (isMoving()) {
+            Move(this.nextMove, tpf);
+            return;
+        }
         if (getTarget() == null || getTarget().equals(getCord())) {
             setNormalTarget(3);
         }
-        if (!canMoveIn((int)target.x, (int)target.y)) {
+        if (!canMoveIn((int) target.x, (int) target.y)) {
             setNormalTarget(1);
         }
-        Vector2f nextMove = getNextMove();
-        Move(nextMove, tpf);
+        this.nextMove = getNextMove();
+        Move(this.nextMove, tpf);
+    }
+
+    private void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
+    private boolean isMoving() {
+        return this.moving;
     }
 }
