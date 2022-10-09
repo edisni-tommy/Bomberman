@@ -11,6 +11,7 @@ import Particles.BombExplosion;
 import UI.InGameGUI.Defeat;
 import UI.InGameGUI.InGame;
 import UI.ScenceGraphController;
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
@@ -86,10 +87,14 @@ public class Bomb extends Entity {
         }
     }
 
+    private boolean isColide(float x, float y, float u, float v) {
+        return Math.hypot(x - u, y - v) < 1.5f;
+    }
+
     private void checkKillPlayer(int x, int y) {
         List<Player> removeList = new ArrayList<>();
         for (Player player: PlayerList.getList()) {
-            if ((int) player.getCoord().x == x && (int) player.getCoord().y == y) {
+            if (isColide(player.getPosition().x, player.getPosition().z, x * 2f, y * 2f)) {
                 removeList.add(player);
             }
         }
