@@ -35,7 +35,7 @@ public class GameSetting extends ScenceGraph {
             @Override
             public void isSelected() {
                 ScenceGraphController.removeExtension();
-                ScenceGraphController.setPause();
+                ScenceGraphController.setPause(false);
             }
         };
         restart = new Button(new Vector2f(460, 200), new Vector2f(210, 80), "Textures/Menu/button_long.png", "RESTART GAME") {

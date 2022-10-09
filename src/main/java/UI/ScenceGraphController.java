@@ -12,6 +12,7 @@ public class ScenceGraphController {
     }
 
     public static void setExtension(ScenceGraph cur) {
+        setPause(true);
         extension = cur;
         extension.display();
     }
@@ -34,7 +35,7 @@ public class ScenceGraphController {
         }
     }
 
-    public static void setPause() {
-        scence.setDisplayed(!getScence().isDisplayed());
+    public static void setPause(boolean pause) {
+        scence.setDisplayed(!pause);
     }
 }

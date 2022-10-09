@@ -96,7 +96,7 @@ public class Bomb extends Entity {
         for (Player player: removeList) {
             PlayerList.remove(player);
             if (player instanceof MainPlayer) {
-                ScenceGraphController.setExtension(new Defeat(InGame.getLevel()));
+                ScenceGraphController.setExtension(new Defeat());
             }
         }
     }
