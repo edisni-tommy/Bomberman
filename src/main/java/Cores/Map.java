@@ -3,6 +3,7 @@ package Cores;
 import Entities.BombList;
 import Entities.Entity;
 import Entities.Player.Enemies.EasyBot;
+import Entities.Player.Enemies.NormalBot;
 import Entities.Player.MainPlayer;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
@@ -68,6 +69,10 @@ public class Map {
                 break;
             case '1':
                 Player easyBot = new EasyBot(new Vector3f(i * 2f, 1, j * 2f));
+                break;
+            case '2':
+                Player normalBot = new NormalBot(new Vector3f(i * 2f, 1, j * 2f));
+                break;
         }
     }
 

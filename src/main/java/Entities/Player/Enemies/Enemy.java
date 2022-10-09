@@ -209,11 +209,11 @@ public class Enemy extends Player {
         }
     }
 
-    private void setMoving(boolean moving) {
+    public void setMoving(boolean moving) {
         this.moving = moving;
     }
 
-    private boolean isMoving() {
+    public boolean isMoving() {
         return this.moving;
     }
 

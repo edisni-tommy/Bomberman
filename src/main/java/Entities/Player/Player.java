@@ -19,7 +19,7 @@ public class Player extends Entity {
     private final float checkSize = 0.5f;
 
     private final float DEFAUT_BUFF_DURATION = 10.0f;
-    private final float DEFAULT_SPEED = 3.0f;
+    protected final float DEFAULT_SPEED = 3.0f;
     protected float speed = DEFAULT_SPEED;
     private float speedBuffDuration = 0f;
 
