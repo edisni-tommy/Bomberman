@@ -22,6 +22,10 @@ public class ScenceGraphController {
         Main.GUI_NODE.detachAllChildren();
     }
 
+    public static void scale() {
+        if (scence != null) scence.scale();
+        if (extension != null) extension.scale();
+    }
     public static void removeExtension() {
         if (extension != null) extension.remove();
     }

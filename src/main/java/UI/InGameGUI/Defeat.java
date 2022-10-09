@@ -1,5 +1,6 @@
 package UI.InGameGUI;
 
+import Cores.Config;
 import Cores.Main;
 import UI.Menu.Button;
 import UI.Menu.Image;
@@ -21,23 +22,32 @@ public class Defeat extends ScenceGraph {
 
     public void initialize() {
         Main.GUI_NODE.detachAllChildren();
-        background = new Image(new Vector2f(380, 260), new Vector2f(360,240), "Textures/Menu/Lobby-Background.png");
-        home = new Button(new Vector2f(460, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Home"){
+        background = new Image(new Vector2f(380, 260), new Vector2f(360, 240), "Textures/Menu/Lobby-Background.png");
+        home = new Button(new Vector2f(460, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Home") {
             @Override
-            public void isSelected() {
+            public void Selected() {
+                Config.setLevel(InGame.getLevel());
                 ScenceGraphController.removeExtension();
                 ScenceGraphController.remove();
                 ScenceGraphController.setScence(new MainMenu());
             }
         };
-        tryAgain = new Button(new Vector2f(460, 300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Try Again"){
+        tryAgain = new Button(new Vector2f(460, 300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Try Again") {
             @Override
-            public void isSelected() {
-                  ScenceGraphController.removeExtension();
-                  ScenceGraphController.remove();
-                  ScenceGraphController.setScence(new InGame(InGame.getLevel()));;
+            public void Selected() {
+                ScenceGraphController.removeExtension();
+                ScenceGraphController.remove();
+                ScenceGraphController.setScence(new InGame(InGame.getLevel()));
+                ;
             }
         };
+    }
+
+    @Override
+    public void display() {
+        background.display();
+        tryAgain.display();
+        home.display();
     }
 
     @Override
@@ -48,10 +58,8 @@ public class Defeat extends ScenceGraph {
     }
 
     @Override
-    public void display() {
-        background.display();
-        tryAgain.display();
-        home.display();
+    public void scale() {
+
     }
 
     @Override

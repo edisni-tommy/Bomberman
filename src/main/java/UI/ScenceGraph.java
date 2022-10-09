@@ -15,5 +15,6 @@ public abstract class ScenceGraph {
 
     public abstract void remove();
 
+    public abstract void scale();
     public abstract void update(float tpf);
 }

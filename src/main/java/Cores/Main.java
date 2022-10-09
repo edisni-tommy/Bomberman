@@ -4,6 +4,7 @@ import Entities.BombList;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
 import Input.PlayerInput;
+import UI.InGameGUI.InGame;
 import UI.Menu.MainMenu;
 import UI.ScenceGraph;
 import UI.ScenceGraphController;
@@ -28,6 +29,9 @@ public class Main extends SimpleApplication {
 
     public static final int HEIGHT = 720;
     public static final int WIDTH = 1080;
+
+    public static float SCALEWIDTH;
+    public static float SCALEHEIGHT;
     public static AppSettings APP_SETTINGS;
     public static Node ROOT_NODE;
     public static Node GUI_NODE;
@@ -45,6 +49,10 @@ public class Main extends SimpleApplication {
         APP_SETTINGS.setTitle("Bomberman");
         APP_SETTINGS.setVSync(true);
         APP_SETTINGS.setFrameRate(60);
+        Config.loadConfig();
+        if (Config.isFullScreen()) {
+            toggleToFullscreen();
+        }
         APP.setSettings(APP_SETTINGS);
         APP.setDisplayStatView(false);
         APP.setShowSettings(false);
@@ -69,5 +77,17 @@ public class Main extends SimpleApplication {
     @Override
     public void simpleUpdate(float tpf) {
         ScenceGraphController.update(tpf);
+    }
+
+    public static void toggleToFullscreen() {
+        GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        DisplayMode[] modes = device.getDisplayModes();
+        int width = modes[modes.length-1].getWidth();
+        int height = modes[modes.length-1].getHeight();
+        SCALEWIDTH = (float) width / WIDTH;
+        SCALEHEIGHT = (float)  height / HEIGHT;
+        APP_SETTINGS.setResolution(width, height);
+        APP_SETTINGS.setFullscreen(device.isFullScreenSupported());
+        APP.setSettings(APP_SETTINGS);
     }
 }

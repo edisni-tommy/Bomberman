@@ -1,5 +1,6 @@
 package UI.Menu;
 
+import Cores.Config;
 import Cores.Main;
 import UI.InGameGUI.InGame;
 import UI.ScenceGraph;
@@ -16,6 +17,42 @@ public class MainMenu extends ScenceGraph {
     public MainMenu() {
         initialize();
     }
+
+    public void initialize() {
+        background = new Image(new Vector2f(Main.APP_SETTINGS.getWidth(), Main.APP_SETTINGS.getHeight()), "Textures/Menu/Lobby-Background.png");
+        play = new Button(new Vector2f(440, 500), new Vector2f(200, 75), "Textures/Menu/button_long.png", "New game") {
+            @Override
+            public void Selected() {
+                setDisplayed(false);
+                ScenceGraphController.remove();
+                ScenceGraphController.setScence(new InGame(1));
+            }
+        };
+        continuegame = new Button(new Vector2f(440, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Continue") {
+            @Override
+            public void Selected() {
+                setDisplayed(false);
+                ScenceGraphController.remove();
+                ScenceGraphController.setScence(new InGame(Config.getLevel()));
+            }
+        };
+        setting = new Button(new Vector2f(440, 300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Setting") {
+            @Override
+            public void Selected() {
+                setDisplayed(false);
+                ScenceGraphController.remove();
+                ScenceGraphController.setScence(new MenuSetting());
+            }
+        };
+        exit = new Button(new Vector2f(440, 200), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Exit") {
+            @Override
+            public void Selected() {
+                Main.APP.stop();
+                Config.saveConfig();
+            }
+        };
+    }
+
     @Override
     public void display() {
         background.display();
@@ -35,27 +72,12 @@ public class MainMenu extends ScenceGraph {
     }
 
     @Override
-    public void update(float tpf) {
+    public void scale() {
 
     }
 
-    public void initialize() {
-        background = new Image(new Vector2f(Main.WIDTH, Main.HEIGHT), "Textures/Menu/Lobby-Background.png");
-        play = new Button(new Vector2f(440,500), new Vector2f(200, 75), "Textures/Menu/button_long.png", "New game"){
-            @Override
-            public void isSelected() {
-                setDisplayed(false);
-                ScenceGraphController.remove();
-                ScenceGraphController.setScence(new InGame(1));
-            }
-        };
-        continuegame = new Button(new Vector2f(440, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Continue");
-        setting = new Button(new Vector2f(440,300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Setting");
-        exit = new Button(new Vector2f(440,200), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Exit") {
-            @Override
-            public void isSelected() {
-                Main.APP.stop();
-            }
-        };
+    @Override
+    public void update(float tpf) {
+
     }
 }

@@ -14,11 +14,26 @@ import UI.ScenceGraphController;
 import java.io.FileNotFoundException;
 
 public class InGame extends ScenceGraph {
-    private static int level;
+    private static int level = 1;
+
     public InGame(int level) {
         InGame.level = level;
         setDisplayed(true);
     }
+
+    public static int getLevel() {
+        return level;
+    }
+
+    public static void setLevel(int lastLevel) {
+        level = lastLevel;
+    }
+
+    public void setDisplayed(boolean displayed) {
+        super.setDisplayed(displayed);
+        PlayerInput.setActive(displayed);
+    }
+
     @Override
     public void update(float tpf) {
         if (!isDisplayed()) {
@@ -51,12 +66,8 @@ public class InGame extends ScenceGraph {
         setDisplayed(false);
     }
 
-    public static int getLevel() {
-        return level;
-    }
+    @Override
+    public void scale() {
 
-    public void setDisplayed(boolean displayed) {
-        super.setDisplayed(displayed);
-        PlayerInput.setActive(displayed);
     }
 }

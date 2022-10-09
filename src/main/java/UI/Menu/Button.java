@@ -8,6 +8,7 @@ import com.jme3.math.Vector2f;
 public class Button extends Image {
     private Text text;
     private boolean On = true;
+
     public Button(Vector2f pos, Vector2f size, String path) {
         super(pos, size, path);
         Main.INPUT_MANAGER.addListener(actionListener, "LeftClick");
@@ -32,6 +33,12 @@ public class Button extends Image {
         setOn(false);
     }
 
+    @Override
+    public void scale() {
+        super.scale();
+        text.scale();
+    }
+
     public void setOn(boolean on) {
         On = on;
     }
@@ -40,13 +47,13 @@ public class Button extends Image {
         if (On) {
             if (keyPressed && name.equals("LeftClick")) {
                 if (isInside(Main.INPUT_MANAGER.getCursorPosition())) {
-                    isSelected();
+                    Selected();
                 }
             }
         }
     };
 
-    public void isSelected() {
+    public void Selected() {
 
     }
 
