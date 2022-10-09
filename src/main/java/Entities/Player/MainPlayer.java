@@ -62,7 +62,7 @@ public class MainPlayer extends Player {
     }
 
     public void checkBuffItem() {
-        Vector2f position = getCord();
+        Vector2f position = getCoord();
         Entity buffItem = Map.getObject((int)position.x, (int)position.y);
         if (buffItem == null) {
             return;
@@ -83,7 +83,7 @@ public class MainPlayer extends Player {
     }
 
     public void checkPortal() {
-        Vector2f position = getCord();
+        Vector2f position = getCoord();
         Entity entity = Map.getObject((int)position.x, (int)position.y);
         if (entity == null) {
             return;

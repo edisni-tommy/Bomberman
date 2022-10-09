@@ -3,12 +3,17 @@ package Entities.Player.Enemies;
 import Cores.Map;
 import Entities.BuffItem.BuffItem;
 import Entities.Entity;
+import Entities.Player.MainPlayer;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
+import UI.InGameGUI.Defeat;
+import UI.InGameGUI.InGame;
+import UI.ScenceGraphController;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
+import java.nio.file.PathMatcher;
 import java.util.*;
 
 public class Enemy extends Player {
@@ -19,6 +24,7 @@ public class Enemy extends Player {
     private static final int[] dy = {0, 0, 1, -1};
     private boolean moving;
     private Vector2f nextMove;
+    private Vector2f lastPosition;
 
     public Enemy(Vector3f position, String path) {
         super(position, path);
@@ -37,7 +43,7 @@ public class Enemy extends Player {
     }
 
     public void setNormalTarget(int distance) {
-        Vector2f position = getCord();
+        Vector2f position = getCoord();
         LinkedList<Vector3f> q = new LinkedList<>();
         boolean[][] isVisited = new boolean[20][20];
         ArrayList<Vector2f> canReach = new ArrayList<>();
@@ -68,11 +74,11 @@ public class Enemy extends Player {
     }
 
     public void setChaseTarget() {
-        this.target = PlayerList.getMainPlayer().getCord();
+        this.target = PlayerList.getMainPlayer().getCoord();
     }
 
     public Vector2f getNextMove() {
-        Vector2f position = getCord();
+        Vector2f position = getCoord();
         Vector2f target = getTarget();
 
         LinkedList<Vector3f> q = new LinkedList<>();
@@ -155,7 +161,10 @@ public class Enemy extends Player {
     private boolean canMoveIn(int x, int y) {
         for (Player player : PlayerList.getList()) {
             if (player instanceof Enemy) {
-                if (player.getCord().equals(new Vector2f(x, y))) {
+                if(player.equals(this)) {
+                    continue;
+                }
+                if (player.getCoord().equals(new Vector2f(x, y))) {
                     return false;
                 }
             }
@@ -164,18 +173,41 @@ public class Enemy extends Player {
     }
 
     public void onUpdate(float tpf) {
+        onMoving(tpf);
+        checkKillPlayer();
+    }
+
+    public void onMoving(float tpf) {
         if (isMoving()) {
+            if (!canMoveIn((int)this.nextMove.x, (int)this.nextMove.y)) {
+                this.nextMove = this.lastPosition;
+            }
             Move(this.nextMove, tpf);
             return;
         }
-        if (getTarget() == null || getTarget().equals(getCord())) {
+        if (getTarget() == null || getTarget().equals(getCoord())) {
             setNormalTarget(3);
         }
         if (!canMoveIn((int) target.x, (int) target.y)) {
             setNormalTarget(1);
         }
         this.nextMove = getNextMove();
+        this.lastPosition = getCoord();
         Move(this.nextMove, tpf);
+    }
+
+    public void checkKillPlayer() {
+        MainPlayer mainPlayer = (MainPlayer) PlayerList.getMainPlayer();
+        if (mainPlayer == null) {
+            return;
+        }
+        Vector3f MainPlayerPosition = mainPlayer.getPosition();
+        Vector3f position = getPosition();
+        if(distance(position, MainPlayerPosition) <= 1.5f) {
+            //PlayerList.remove(mainPlayer);
+            ScenceGraphController.setPause();
+            ScenceGraphController.setExtension(new Defeat(InGame.getLevel()));
+        }
     }
 
     private void setMoving(boolean moving) {
@@ -184,5 +216,9 @@ public class Enemy extends Player {
 
     private boolean isMoving() {
         return this.moving;
+    }
+
+    private double distance(Vector3f a, Vector3f b) {
+        return Math.hypot(a.x - b.x, a.z - b.z);
     }
 }

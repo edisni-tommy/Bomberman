@@ -64,9 +64,9 @@ public class Player extends Entity {
         if (invalid(currentX + speed * tpf + checkSize))  {
             return;
         }
-        Vector2f leftX = getPositionCord(currentX + speed * tpf + checkSize, currentZ + checkSize);
-        Vector2f rightX = getPositionCord(currentX + speed * tpf + checkSize, currentZ - checkSize);
-        Vector2f nextX = getPositionCord(currentX + speed * tpf + checkSize, currentZ);
+        Vector2f leftX = getPositionCoord(currentX + speed * tpf + checkSize, currentZ + checkSize);
+        Vector2f rightX = getPositionCoord(currentX + speed * tpf + checkSize, currentZ - checkSize);
+        Vector2f nextX = getPositionCoord(currentX + speed * tpf + checkSize, currentZ);
         if (Map.isBlocked((int)leftX.x, (int)leftX.y) || Map.isBlocked((int)rightX.x, (int)rightX.y) || Map.isBlocked((int)nextX.x, (int)nextX.y)) {
             return;
         } else {
@@ -82,9 +82,9 @@ public class Player extends Entity {
         if (invalid(currentX - speed * tpf + checkSize))  {
             return;
         }
-        Vector2f leftX = getPositionCord(currentX - speed * tpf - checkSize, currentZ + checkSize);
-        Vector2f rightX = getPositionCord(currentX - speed * tpf - checkSize, currentZ - checkSize);
-        Vector2f nextX = getPositionCord(currentX - speed * tpf - checkSize, currentZ);
+        Vector2f leftX = getPositionCoord(currentX - speed * tpf - checkSize, currentZ + checkSize);
+        Vector2f rightX = getPositionCoord(currentX - speed * tpf - checkSize, currentZ - checkSize);
+        Vector2f nextX = getPositionCoord(currentX - speed * tpf - checkSize, currentZ);
         if (Map.isBlocked((int)leftX.x, (int)leftX.y) || Map.isBlocked((int)rightX.x, (int)rightX.y) || Map.isBlocked((int)nextX.x, (int)nextX.y)) {
             return;
         } else {
@@ -100,9 +100,9 @@ public class Player extends Entity {
         if (invalid(currentZ - speed * tpf + checkSize))  {
             return;
         }
-        Vector2f leftX = getPositionCord(currentX + checkSize, currentZ - speed * tpf - checkSize);
-        Vector2f rightX = getPositionCord(currentX - checkSize, currentZ - speed * tpf - checkSize);
-        Vector2f nextX = getPositionCord(currentX, currentZ  - speed * tpf - checkSize);
+        Vector2f leftX = getPositionCoord(currentX + checkSize, currentZ - speed * tpf - checkSize);
+        Vector2f rightX = getPositionCoord(currentX - checkSize, currentZ - speed * tpf - checkSize);
+        Vector2f nextX = getPositionCoord(currentX, currentZ  - speed * tpf - checkSize);
         if (Map.isBlocked((int)leftX.x, (int)leftX.y) || Map.isBlocked((int)rightX.x, (int)rightX.y) || Map.isBlocked((int)nextX.x, (int)nextX.y)) {
             return;
         } else {
@@ -118,9 +118,9 @@ public class Player extends Entity {
         if (invalid(currentZ + speed * tpf + checkSize))  {
             return;
         }
-        Vector2f leftX = getPositionCord(currentX + checkSize, currentZ + speed * tpf + checkSize);
-        Vector2f rightX = getPositionCord(currentX - checkSize, currentZ + speed * tpf + checkSize);
-        Vector2f nextX = getPositionCord(currentX, currentZ  + speed * tpf + checkSize);
+        Vector2f leftX = getPositionCoord(currentX + checkSize, currentZ + speed * tpf + checkSize);
+        Vector2f rightX = getPositionCoord(currentX - checkSize, currentZ + speed * tpf + checkSize);
+        Vector2f nextX = getPositionCoord(currentX, currentZ  + speed * tpf + checkSize);
         if (Map.isBlocked((int)leftX.x, (int)leftX.y) || Map.isBlocked((int)rightX.x, (int)rightX.y) || Map.isBlocked((int)nextX.x, (int)nextX.y)) {
             return;
         } else {
@@ -133,7 +133,7 @@ public class Player extends Entity {
             return;
         }
 
-        Vector2f position = getCord();
+        Vector2f position = getCoord();
         int x = (int)position.x;
         int y = (int)position.y;
         if (Map.getObject(x, y) == null) {

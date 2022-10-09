@@ -30,14 +30,14 @@ public abstract class Entity {
         this.spatial.setLocalTranslation(position);
     }
 
-    public Vector2f getCord() {
+    public Vector2f getCoord() {
         Vector3f current = this.getPosition();
         int cordX = (int) ((current.x + Entity.BLOCK_SIZE / 2) / Entity.BLOCK_SIZE);
         int cordZ = (int) ((current.z + Entity.BLOCK_SIZE / 2) / Entity.BLOCK_SIZE);
         return new Vector2f(cordX, cordZ);
     }
 
-    public Vector2f getPositionCord(float x, float z) {
+    public Vector2f getPositionCoord(float x, float z) {
         float cordX = (int) ((x + Entity.BLOCK_SIZE / 2) / Entity.BLOCK_SIZE);
         float cordZ = (int) ((z + Entity.BLOCK_SIZE / 2) / Entity.BLOCK_SIZE);
         return new Vector2f(cordX, cordZ);
