@@ -8,6 +8,8 @@ import Entities.BuffItem.ShieldBuff;
 import Entities.BuffItem.SpeedBuff;
 import Entities.Entity;
 import Entities.Terrain.Portal;
+import UI.Menu.MainMenu;
+import UI.ScenceGraphController;
 import com.jme3.input.ChaseCamera;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
@@ -90,7 +92,8 @@ public class MainPlayer extends Player {
         }
         if (entity instanceof Portal) {
             if (Player.countEnemy == 0) {
-                //win
+                ScenceGraphController.remove();
+                ScenceGraphController.setScence(new MainMenu());
             }
         }
     }

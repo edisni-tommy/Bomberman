@@ -224,6 +224,16 @@ public class Player extends Entity {
         this.shieldBuffDuration = DEFAUT_BUFF_DURATION;
     }
 
+    public boolean isShield() {
+        return this.isShield;
+    }
+
+    public void removeShield() {
+        this.shieldBuffDuration = 0f;
+        this.isShield = false;
+
+    }
+
     public void remove() {
         super.remove();
     }

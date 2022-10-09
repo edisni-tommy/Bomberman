@@ -25,9 +25,12 @@ public class Map {
 
     private static boolean hasPortal;
 
+    public static int containerCount;
+
 
     public static void initalize(int level) throws FileNotFoundException {
         hasPortal = false;
+        containerCount = 0;
         map = new char[20][20];
         entity = new Entity[20][20];
         for (int i = 0; i < 20; ++ i) {
@@ -75,6 +78,11 @@ public class Map {
                 break;
         }
     }
+
+    public static int getContainerCount() {
+        return containerCount;
+    }
+
 
     public static void remove(int x, int y) {
         entity[x][y].remove();
