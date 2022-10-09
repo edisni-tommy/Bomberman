@@ -70,7 +70,6 @@ public class Enemy extends Player {
             }
         }
         this.target = canReach.get((int) (Math.random() * canReach.size()));
-        System.out.println(this.target);
     }
 
     public void setChaseTarget() {
@@ -181,6 +180,7 @@ public class Enemy extends Player {
         if (isMoving()) {
             if (!canMoveIn((int)this.nextMove.x, (int)this.nextMove.y)) {
                 this.nextMove = this.lastPosition;
+                this.target = this.lastPosition;
             }
             Move(this.nextMove, tpf);
             return;

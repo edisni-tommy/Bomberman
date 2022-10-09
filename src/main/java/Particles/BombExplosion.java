@@ -24,7 +24,7 @@ public class BombExplosion {
         explosion.setEndColor(new ColorRGBA(1f, 0f, 0f, 1f));
         explosion.setStartSize(1f);
         explosion.setEndSize(0.1f);
-        explosion.setGravity(0, 0, 0);
+//        explosion.setGravity(0, 0, 0);
         explosion.setLowLife(1f);
         explosion.setHighLife(3f);
         explosion.getParticleInfluencer().setVelocityVariation(0.3f);
