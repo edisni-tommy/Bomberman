@@ -39,7 +39,6 @@ public class PlayerInput {
                     player.setBomb();
                 }
                 if (s.equals("setting")) {
-                    ScenceGraphController.setPause();
                     ScenceGraphController.setExtension(new GameSetting());
                 }
             }

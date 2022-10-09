@@ -34,8 +34,8 @@ public class Bomb extends Entity {
             setBlocked(true);
             return;
         }
-        Vector2f mainPlayerCord = mainPlayer.getCord();
-        Vector2f position = getCord();
+        Vector2f mainPlayerCord = mainPlayer.getCoord();
+        Vector2f position = getCoord();
         if (position.x != mainPlayerCord.x || position.y != mainPlayerCord.y) {
             setBlocked(true);
         }
@@ -52,7 +52,7 @@ public class Bomb extends Entity {
     }
 
     private void explore() {
-        Vector2f position = getCord();
+        Vector2f position = getCoord();
         int x = (int) position.x;
         int y = (int) position.y;
         Map.setObject(x, y, null);
@@ -89,14 +89,14 @@ public class Bomb extends Entity {
     private void checkKillPlayer(int x, int y) {
         List<Player> removeList = new ArrayList<>();
         for (Player player: PlayerList.getList()) {
-            if ((int) player.getCord().x == x && (int) player.getCord().y == y) {
+            if ((int) player.getCoord().x == x && (int) player.getCoord().y == y) {
                 removeList.add(player);
             }
         }
         for (Player player: removeList) {
             PlayerList.remove(player);
             if (player instanceof MainPlayer) {
-                ScenceGraphController.setExtension(new Defeat(InGame.getLevel()));
+                ScenceGraphController.setExtension(new Defeat());
             }
         }
     }
