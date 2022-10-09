@@ -53,7 +53,8 @@ public class Enemy extends Player {
 
         while (!q.isEmpty()) {
             Vector3f u = q.removeFirst();
-            if (u.z >= distance) {
+            canReach.add(new Vector2f(u.x, u.y));
+            if (u.z > distance) {
                 break;
             }
             for (int i = 0; i < 4; ++i) {
@@ -65,7 +66,6 @@ public class Enemy extends Player {
                 if (!isVisited[nextX][nextY]) {
                     isVisited[nextX][nextY] = true;
                     q.addLast(new Vector3f(nextX, nextY, u.z + 1));
-                    canReach.add(new Vector2f(nextX, nextY));
                 }
             }
         }
@@ -79,6 +79,10 @@ public class Enemy extends Player {
     public Vector2f getNextMove() {
         Vector2f position = getCoord();
         Vector2f target = getTarget();
+
+        if (position.equals(target)) {
+            return position;
+        }
 
         LinkedList<Vector3f> q = new LinkedList<>();
         Vector2f[][] trace = new Vector2f[20][20];

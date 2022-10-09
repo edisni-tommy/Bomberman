@@ -126,8 +126,7 @@ public class Bomb extends Entity {
     private Entity randomEntity(int x, int y) {
         if (!Map.isHasPortal()) {
             int rand = (int) (Math.random() * Map.getContainerCount());
-            System.out.println(Map.getContainerCount());
-            if(rand == 0) {
+            if(rand % 10 == 0) {
                 Map.setHasPortal(true);
                 return new Portal(new Vector3f(x * 2f, 1, y * 2f));
             }
