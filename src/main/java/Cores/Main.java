@@ -1,29 +1,19 @@
 package Cores;
 
-import Entities.BombList;
-import Entities.Player.Player;
-import Entities.Player.PlayerList;
-import Input.PlayerInput;
-import UI.InGameGUI.InGame;
 import UI.Menu.MainMenu;
-import UI.ScenceGraph;
 import UI.ScenceGraphController;
-import Particles.BombExplosionList;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.input.InputManager;
-import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
 
 import Input.SystemInput;
-import com.jme3.ui.Picture;
 import org.lwjgl.openal.AL10;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 
 public class Main extends SimpleApplication {
 
@@ -68,7 +58,6 @@ public class Main extends SimpleApplication {
         GUI_NODE = guiNode;
         CAM = cam;
         flyCam.setEnabled(false);
-        //flyCam.setDragToRotate(true);
         assetManager.registerLocator("assets", FileLocator.class);
         SystemInput.initialize();
         ScenceGraphController.setScence(new MainMenu());

@@ -41,7 +41,6 @@ public class Player extends Entity {
     protected BombStatusBar bombStatusBar;
     protected ShieldStatus shieldStatus;
 
-    protected static int countEnemy = 0;
 
     public Player(Vector3f position, String path) {
         super(position, path);
@@ -86,7 +85,6 @@ public class Player extends Entity {
         Vector2f rightX = getPositionCoord(currentX - speed * tpf - checkSize, currentZ - checkSize);
         Vector2f nextX = getPositionCoord(currentX - speed * tpf - checkSize, currentZ);
         if (Map.isBlocked((int)leftX.x, (int)leftX.y) || Map.isBlocked((int)rightX.x, (int)rightX.y) || Map.isBlocked((int)nextX.x, (int)nextX.y)) {
-            return;
         } else {
            this.setPosition(new Vector3f(currentX - tpf * speed, currentPosition.y, currentPosition.z));
         }
@@ -231,7 +229,10 @@ public class Player extends Entity {
     public void removeShield() {
         this.shieldBuffDuration = 0f;
         this.isShield = false;
+    }
 
+    public boolean isSpeedBuff() {
+        return this.speedBuffDuration > 0;
     }
 
     public void remove() {

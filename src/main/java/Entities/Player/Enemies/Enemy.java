@@ -29,13 +29,13 @@ public class Enemy extends Player {
     public Enemy(Vector3f position, String path) {
         super(position, path);
         this.speed = 1.0f;
-        Player.countEnemy++;
+        Map.enemyCount++;
         bombStatusBar.remove();
     }
 
     public void remove() {
         super.remove();
-        --Player.countEnemy;
+        --Map.enemyCount;
     }
 
     public void onMoving() {
@@ -211,6 +211,10 @@ public class Enemy extends Player {
             //PlayerList.remove(mainPlayer);
             ScenceGraphController.setExtension(new Defeat());
         }
+    }
+
+    public void setTarget(Vector2f target) {
+        this.target = target;
     }
 
     public void setMoving(boolean moving) {

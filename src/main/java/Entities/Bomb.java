@@ -8,6 +8,7 @@ import Entities.Player.PlayerList;
 import Entities.Terrain.Container;
 import Entities.Terrain.Portal;
 import Particles.BombExplosion;
+import Particles.BombSpark;
 import UI.InGameGUI.Defeat;
 import UI.InGameGUI.InGame;
 import UI.ScenceGraphController;
@@ -21,10 +22,15 @@ import java.util.List;
 public class Bomb extends Entity {
 
     private float timeExplore = 4.0f;
-    private static int flame;
+    private final int flame;
+
+    private final BombSpark bombSpark;
+
+
     public Bomb(Vector3f position, int flame) {
         super(position, "Models/Bomb/bomb.obj");
         this.flame = flame;
+        bombSpark = new BombSpark(this.spatial);
         BombList.add(this);
     }
 
@@ -50,6 +56,7 @@ public class Bomb extends Entity {
     public void remove() {
         explore();
         super.remove();
+        bombSpark.remove();
     }
 
     private void explore() {

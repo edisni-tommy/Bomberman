@@ -18,7 +18,7 @@ public class Image {
         if (Config.isFullScreen()) {
             setSize(new Vector2f(getWidth() * Main.SCALEWIDTH, getHeight() * Main.SCALEHEIGHT));
             setPos(new Vector2f(getPosX()* Main.SCALEWIDTH, getPosY() * Main.SCALEHEIGHT));
-        };
+        }
         pic.setImage(Main.ASSET_MANAGER, path, true);
     }
 
@@ -31,6 +31,9 @@ public class Image {
     public Image(Vector2f size, String path) {
         pic = new Picture(path);
         setSize(size);
+        if (Config.isFullScreen()) {
+            setSize(new Vector2f(getWidth() * Main.SCALEWIDTH, getHeight() * Main.SCALEHEIGHT));
+        }
         pic.setImage(Main.ASSET_MANAGER, path, true);
     }
 

@@ -8,35 +8,38 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 
 public class BombExplosion {
-    private ParticleEmitter explosion;
+
+    private ParticleEmitter particle;
     private final long DURATION = 1000;
     private final long startTime;
     public BombExplosion(Vector3f position) {
-        explosion = new ParticleEmitter("explosion effect", ParticleMesh.Type.Triangle, 15);
-        Material mat_red = new Material(Main.ASSET_MANAGER, "Common/MatDefs/Misc/Particle.j3md");
-        mat_red.setTexture("Texture", Main.ASSET_MANAGER.loadTexture("Effects/Flame/flame.png"));
-        explosion.setMaterial(mat_red);
-        explosion.setImagesX(2);
-        explosion.setImagesY(2);
-        explosion.setLocalTranslation(position);
-        explosion.getLocalTranslation().addLocal(0, 1.35f, 0.4f);
-        explosion.setStartColor(new ColorRGBA(1f, 1f, 0f, 0.5f));
-        explosion.setEndColor(new ColorRGBA(1f, 0f, 0f, 1f));
-        explosion.setStartSize(1f);
-        explosion.setEndSize(0.1f);
-//        explosion.setGravity(0, 0, 0);
-        explosion.setLowLife(1f);
-        explosion.setHighLife(3f);
-        explosion.getParticleInfluencer().setVelocityVariation(0.3f);
-        explosion.emitAllParticles();
+        super();
+        particle = new ParticleEmitter("bombSpark", ParticleMesh.Type.Triangle, 15);
+        Material material = new Material(Main.ASSET_MANAGER, "Common/MatDefs/Misc/Particle.j3md");
+        material.setTexture("Texture", Main.ASSET_MANAGER.loadTexture("Textures/Particles/bomb_explode.png"));
+        particle.setMaterial(material);
+        particle.setLocalTranslation(position);
+        particle.setImagesX(1);
+        particle.setImagesY(2);
+        particle.setStartColor(new ColorRGBA(1f, 0.1f, 0.1f, 1f));
+        particle.setEndColor(new ColorRGBA(0f, 0f, 0f, 1f));
+        particle.setGravity(0, 0, 0);
+        particle.setStartSize(0.8f);
+        particle.setEndSize(0.0f);
+        particle.setLowLife(1.2f);
+        particle.setHighLife(1.5f);
+        particle.setRotateSpeed(2);
+        particle.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 1, 0));
+        particle.getParticleInfluencer().setVelocityVariation(0.5f);
+        particle.emitAllParticles();
+        Main.ROOT_NODE.attachChild(particle);
         startTime = System.currentTimeMillis();
-        Main.ROOT_NODE.attachChild(explosion);
         BombExplosionList.add(this);
     }
 
     public void remove() {
-        Main.ROOT_NODE.detachChild(explosion);
-        explosion.killAllParticles();
+        Main.ROOT_NODE.detachChild(particle);
+        particle.killAllParticles();
     }
 
     public boolean check() {

@@ -10,7 +10,6 @@ public class NormalBot extends Enemy {
 
     public NormalBot(Vector3f position) {
         super(position, "Models/Monster/spider.obj");
-        this.speed = 1.0f;
     }
 
     public void onUpdate(float tpf) {
@@ -24,6 +23,9 @@ public class NormalBot extends Enemy {
             speed = DEFAULT_SPEED;
             if (!isMoving()) {
                 setChaseTarget();
+                if (getNextMove().equals(getCoord())) {
+                    setTarget(getCoord());
+                }
             }
         } else {
             speed = DEFAULT_SPEED / 2;

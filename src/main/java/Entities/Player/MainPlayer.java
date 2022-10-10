@@ -91,11 +91,10 @@ public class MainPlayer extends Player {
             return;
         }
         if (entity instanceof Portal) {
-            if (Player.countEnemy == 0) {
+            if (Map.enemyCount == 0) {
                 ScenceGraphController.remove();
                 ScenceGraphController.setScence(new MainMenu());
             }
         }
     }
-
 }

@@ -26,11 +26,13 @@ public class Map {
     private static boolean hasPortal;
 
     public static int containerCount;
+    public static int enemyCount;
 
 
     public static void initalize(int level) throws FileNotFoundException {
         hasPortal = false;
         containerCount = 0;
+        enemyCount =0;
         map = new char[20][20];
         entity = new Entity[20][20];
         for (int i = 0; i < 20; ++ i) {
