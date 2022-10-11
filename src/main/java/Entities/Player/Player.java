@@ -4,6 +4,7 @@ import Cores.Map;
 import Entities.Bomb;
 import Entities.Entity;
 import UI.PlayerStatus.BombStatusBar;
+import UI.PlayerStatus.BuffStatus;
 import UI.PlayerStatus.ShieldStatus;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.math.FastMath;
@@ -21,25 +22,26 @@ public class Player extends Entity {
     private final float DEFAUT_BUFF_DURATION = 10.0f;
     protected final float DEFAULT_SPEED = 3.0f;
     protected float speed = DEFAULT_SPEED;
-    private float speedBuffDuration = 0f;
+    protected float speedBuffDuration = 0f;
 
-    protected final float DEFAULT_COOLDOWN_BOMB = 4.0f;
+    private final float DEFAULT_COOLDOWN_BOMB = 4.0f;
     protected float currentCooldownBomb = 0f;
 
     private final int DEFAULT_FLAME = 3;
     private int flame = DEFAULT_FLAME;
-    private float flameBuffDuration = 0f;
+    protected float flameBuffDuration = 0f;
 
     private boolean isShield = false;
-    private float shieldBuffDuration = 0f;
+    protected float shieldBuffDuration = 0f;
 
-    private float bombExtendDuration = 0f;
+    protected float bombExtendDuration = 0f;
     private final int DEFFAULT_BOMB_CARRY = 3;
     protected int bombLeft = DEFFAULT_BOMB_CARRY;
     protected int bombMax = DEFFAULT_BOMB_CARRY;
 
     protected BombStatusBar bombStatusBar;
     protected ShieldStatus shieldStatus;
+    protected BuffStatus buffStatus;
 
 
     public Player(Vector3f position, String path) {
@@ -158,6 +160,7 @@ public class Player extends Entity {
         onBombExtend(tpf);
         bombStatusBar.onUpdate(bombLeft, bombMax, currentCooldownBomb);
         shieldStatus.onUpdate(isShield);
+        buffStatus.onUpdate(speedBuffDuration,shieldBuffDuration,bombExtendDuration,flameBuffDuration);
     }
 
     public void onCooldownBomb(float tpf) {
