@@ -6,6 +6,7 @@ import Input.PlayerInput;
 import UI.Menu.Button;
 import UI.Menu.Image;
 import UI.Menu.MainMenu;
+import UI.PlayerStatus.BuffStatus;
 import UI.ScenceGraph;
 import UI.ScenceGraphController;
 import com.jme3.math.Vector2f;
@@ -33,6 +34,7 @@ public class GameSetting extends ScenceGraph {
                 ScenceGraphController.remove();
                 ScenceGraphController.removeExtension();
                 ScenceGraphController.setScence(new MainMenu());
+                BuffStatus.zoomOut();
             }
         };
         resume = new Button(new Vector2f(460, 300), new Vector2f(210, 80), "Textures/Menu/button_long.png", "RESUME GAME") {

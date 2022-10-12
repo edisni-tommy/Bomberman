@@ -95,6 +95,10 @@ public class Image {
         Main.GUI_NODE.attachChild(pic);
     }
 
+    public void setCanScale(boolean canScale) {
+        this.canScale = canScale;
+    }
+
     public void remove() {
         Main.GUI_NODE.detachChild(pic);
     }

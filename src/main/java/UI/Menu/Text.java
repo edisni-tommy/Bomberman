@@ -15,6 +15,7 @@ public class Text {
     private Rectangle box;
 
     private Vector2f size;
+
     public Text(String text, ColorRGBA color, Vector2f pos, Vector2f size) {
         this.size = size;
         BitmapFont guiFont = Main.ASSET_MANAGER.loadFont("Fonts/debussy.ttf.fnt");
@@ -33,14 +34,14 @@ public class Text {
 
     public void scale() {
         if (Config.isFullScreen()) {
-             hudText.setSize(36);
-             box = new Rectangle(box.x * Main.SCALEWIDTH, box.y * Main.SCALEHEIGHT, box.width * Main.SCALEWIDTH, box.height * Main.SCALEHEIGHT );
-             hudText.setBox(box);
-             hudText.setVerticalAlignment(BitmapFont.VAlign.Center);
-             hudText.setAlignment(BitmapFont.Align.Center);
+            hudText.setSize(36);
+            box = new Rectangle(box.x * Main.SCALEWIDTH, box.y * Main.SCALEHEIGHT, box.width * Main.SCALEWIDTH, box.height * Main.SCALEHEIGHT);
+            hudText.setBox(box);
+            hudText.setVerticalAlignment(BitmapFont.VAlign.Center);
+            hudText.setAlignment(BitmapFont.Align.Center);
         } else {
             hudText.setSize(26);
-            box = new Rectangle(box.x / Main.SCALEWIDTH, box.y / Main.SCALEHEIGHT, box.width / Main.SCALEWIDTH, box.height / Main.SCALEHEIGHT );
+            box = new Rectangle(box.x / Main.SCALEWIDTH, box.y / Main.SCALEHEIGHT, box.width / Main.SCALEWIDTH, box.height / Main.SCALEHEIGHT);
             hudText.setBox(box);
             hudText.setVerticalAlignment(BitmapFont.VAlign.Center);
             hudText.setAlignment(BitmapFont.Align.Center);
@@ -54,12 +55,17 @@ public class Text {
     public void setPosition(Vector2f position) {
         this.hudText.setBox(new Rectangle(position.x, position.y, position.x + size.x, position.y + size.y));
     }
+
     public void display() {
         Main.GUI_NODE.attachChild(hudText);
     }
 
     public void setSize(float size) {
         this.hudText.setSize(size);
+    }
+
+    public float getSize() {
+        return this.hudText.getSize();
     }
 
     public void remove() {
