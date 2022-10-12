@@ -7,6 +7,7 @@ import Entities.Player.Player;
 import Entities.Player.PlayerList;
 import Entities.Terrain.Container;
 import Entities.Terrain.Portal;
+import Entities.Terrain.Rock;
 import Particles.BombExplosion;
 import Particles.BombSpark;
 import UI.InGameGUI.Defeat;
@@ -124,8 +125,11 @@ public class Bomb extends Entity {
             if (cur instanceof Container) {
                 cur.remove();
                 Map.setObject(x, y, randomEntity(x, y));
+                return true;
             }
-            return true;
+            if (cur instanceof Rock) {
+                return true;
+            }
         }
         return false;
     }
