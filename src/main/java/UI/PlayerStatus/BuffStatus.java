@@ -49,38 +49,43 @@ public class BuffStatus{
         float flameDuration = mainPlayer.getFlameDuration();
         float count = (speedDuration > 0 ? 1 : 0) + (shieldDuration > 0 ? 1 : 0) + (bombExtendDuration > 0 ? 1 : 0) + (flameDuration > 0 ? 1 : 0);
         float cnt = count;
-        count /= 2;
-        for (int i = 1; i <= cnt; ++ i) {
-            background.add(new Image(new Vector2f(Main.WIDTH/2 - (count --) * 80, 100), new Vector2f(75, 75), "Textures/Buffs/shadow.png"));
+        count = 4;
+        for (int i = 1; i <= 4; ++ i) {
+            background.add(new Image(new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90, (int)(((count --) - 1) / 2) * 90 + 20),
+                    new Vector2f(75, 75), "Textures/Buffs/shadow.png"));
         }
-        count = cnt/2;
+        count = cnt;
         if (speedDuration > 0) {
-            Text text = new Text(String.format("%.1f", speedDuration) + "s", new ColorRGBA(), new Vector2f(Main.WIDTH/2 - (count) * 80 + 10, 90), new Vector2f(50, 10));
+            Text text = new Text(String.format("%.1f", speedDuration) + "s", new ColorRGBA(),
+                    new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90 + 10, (int)(((count) - 1) / 2) * 90 + 10), new Vector2f(50, 10));
             text.setSize(15);
             buffDurations.add(text);
-            speedBuff.setPos(new Vector2f(Main.WIDTH/2 - (count --) * 80, 100));
+            speedBuff.setPos(new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90, (int)(((count --) - 1) / 2) * 90 + 20));
             speedBuff.display();
 
         }
         if (shieldDuration > 0) {
-            Text text = new Text(String.format("%.1f", shieldDuration) + "s", new ColorRGBA(), new Vector2f(Main.WIDTH/2 - (count) * 80 + 10, 90), new Vector2f(50, 10));
+            Text text = new Text(String.format("%.1f", shieldDuration) + "s", new ColorRGBA(),
+                    new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90 + 10, (int)(((count) - 1) / 2) * 90 + 10), new Vector2f(50, 10));
             text.setSize(15);
             buffDurations.add(text);
-            shieldBuff.setPos(new Vector2f(Main.WIDTH/2 - (count --) * 80, 100));
+            shieldBuff.setPos(new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90, (int)(((count --) - 1) / 2) * 90 + 20));
             shieldBuff.display();
         }
         if (bombExtendDuration > 0) {
-            Text text = new Text(String.format("%.1f", bombExtendDuration) + "s", new ColorRGBA(), new Vector2f(Main.WIDTH/2 - (count) * 80 + 10, 90), new Vector2f(50, 10));
+            Text text = new Text(String.format("%.1f", bombExtendDuration) + "s", new ColorRGBA(),
+                    new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90 + 10, (int)(((count) - 1) / 2) * 90 + 10), new Vector2f(50, 10));
             text.setSize(15);
             buffDurations.add(text);
-            bombExtendBuff.setPos(new Vector2f(Main.WIDTH/2 - (count --) * 80, 100));
+            bombExtendBuff.setPos(new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90, (int)(((count --) - 1) / 2) * 90 + 20));
             bombExtendBuff.display();
         }
         if (flameDuration > 0) {
-            Text text = new Text(String.format("%.1f", flameDuration) + "s", new ColorRGBA(), new Vector2f(Main.WIDTH/2 - (count) * 80 + 10, 90), new Vector2f(50, 10));
+            Text text = new Text(String.format("%.1f", flameDuration) + "s", new ColorRGBA(),
+                    new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90 + 10, (int)(((count) - 1) / 2) * 90 + 10), new Vector2f(50, 10));
             text.setSize(15);
             buffDurations.add(text);
-            flameBuff.setPos(new Vector2f(Main.WIDTH/2 - (count) * 80, 100));
+            flameBuff.setPos(new Vector2f(Main.WIDTH - ((count - 1) % 2 + 1) * 90, (int)(((count) - 1) / 2) * 90 + 20));
             flameBuff.display();
         }
         show();
