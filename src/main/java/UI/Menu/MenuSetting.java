@@ -23,7 +23,6 @@ public class MenuSetting extends ScenceGraph {
             @Override
             public void Selected() {
                 Config.setFullScreen(!Config.isFullScreen());
-                System.out.println(Config.isFullScreen());
                 if (Config.isFullScreen()) {
                     Main.toggleToFullscreen();
                 } else {
@@ -67,11 +66,11 @@ public class MenuSetting extends ScenceGraph {
 
     @Override
     public void scale() {
-        background.scale();
-        fullScreen.scale();
-        music.scale();
-        sound.scale();
-        returnMenu.scale();
+        background.zoomOut();
+        fullScreen.zoomOut();
+        music.zoomOut();
+        sound.zoomOut();
+        returnMenu.zoomOut();
     }
 
     @Override

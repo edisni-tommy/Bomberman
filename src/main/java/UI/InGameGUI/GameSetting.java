@@ -70,10 +70,10 @@ public class GameSetting extends ScenceGraph {
 
     @Override
     public void scale() {
-        background.scale();
-        resume.scale();
-        home.scale();
-        restart.scale();
+        background.zoomOut();
+        resume.zoomOut();
+        home.zoomOut();
+        restart.zoomOut();
     }
 
     @Override

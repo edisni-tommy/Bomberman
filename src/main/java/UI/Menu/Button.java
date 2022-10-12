@@ -1,5 +1,6 @@
 package UI.Menu;
 
+import Cores.Config;
 import Cores.Main;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.math.ColorRGBA;
@@ -34,8 +35,8 @@ public class Button extends Image {
     }
 
     @Override
-    public void scale() {
-        super.scale();
+    public void zoomOut() {
+        super.zoomOut();
         text.scale();
     }
 
@@ -58,7 +59,13 @@ public class Button extends Image {
     }
 
     public boolean isInside(Vector2f cursor) {
-        if (cursor.x < getPosX() || cursor.x > getPosX() + getWidth()) return false;
-        return !(cursor.y < getPosY()) && !(cursor.y > getPosY() + getHeight());
+        float curPosx = cursor.x;
+        float curPosy = cursor.y;
+        if (Config.isFullScreen()) {
+            curPosx /= Main.SCALEWIDTH;
+            curPosy /= Main.SCALEHEIGHT;
+        }
+        if (curPosx < getPosX() || curPosx > getPosX() + getWidth()) return false;
+        return !(curPosy < getPosY()) && !(curPosy > getPosY() + getHeight());
     }
 }

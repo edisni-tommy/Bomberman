@@ -7,6 +7,8 @@ import com.jme3.math.Vector3f;
 import com.jme3.ui.Picture;
 
 public class Image {
+    private boolean canScale = true;
+    private boolean is3D = false;
     protected final Picture pic;
     private final Vector2f pos2D = new Vector2f(0, 0);
     private final Vector2f size = new Vector2f();
@@ -15,10 +17,6 @@ public class Image {
         pic = new Picture(path);
         setPos(pos);
         setSize(size);
-        if (Config.isFullScreen()) {
-            setSize(new Vector2f(getWidth() * Main.SCALEWIDTH, getHeight() * Main.SCALEHEIGHT));
-            setPos(new Vector2f(getPosX()* Main.SCALEWIDTH, getPosY() * Main.SCALEHEIGHT));
-        }
         pic.setImage(Main.ASSET_MANAGER, path, true);
     }
 
@@ -31,9 +29,6 @@ public class Image {
     public Image(Vector2f size, String path) {
         pic = new Picture(path);
         setSize(size);
-        if (Config.isFullScreen()) {
-            setSize(new Vector2f(getWidth() * Main.SCALEWIDTH, getHeight() * Main.SCALEHEIGHT));
-        }
         pic.setImage(Main.ASSET_MANAGER, path, true);
     }
 
@@ -44,6 +39,7 @@ public class Image {
     }
 
     public void setPos(Vector3f pos) {
+        is3D = true;
         pic.setLocalTranslation(pos);
     }
 
@@ -53,14 +49,24 @@ public class Image {
         pic.setWidth(size.x);
         pic.setHeight(size.y);
     }
-    public void scale() {
-        if (Config.isFullScreen()) {
-            setSize(new Vector2f(getWidth() * Main.SCALEWIDTH, getHeight() * Main.SCALEHEIGHT));
-            setPos(new Vector2f(getPosX()* Main.SCALEWIDTH, getPosY() * Main.SCALEHEIGHT));
-        } else {
-            setSize(new Vector2f(getWidth() / Main.SCALEWIDTH, getHeight() / Main.SCALEHEIGHT));
-            setPos(new Vector2f(getPosX() / Main.SCALEWIDTH, getPosY() / Main.SCALEHEIGHT));
+    public void zoomIn() {
+        canScale = false;
+        pic.setWidth(getWidth() * Main.SCALEWIDTH);
+        pic.setHeight(getHeight() * Main.SCALEHEIGHT);
+        if (!is3D) {
+            pic.setPosition(getPosX() * Main.SCALEWIDTH, getPosY() * Main.SCALEHEIGHT);
         }
+    }
+
+    public void zoomOut() {
+        if (!Config.isFullScreen()) {
+            canScale = true;
+            pic.setWidth(getWidth());
+            pic.setHeight(getHeight());
+            pic.setPosition(getPosX(), getPosY());
+        }
+        if (Config.isFullScreen()) zoomIn();
+
     }
     public float getPosX() {
         return pos2D.x;
@@ -78,7 +84,14 @@ public class Image {
         return size.y;
     }
 
+    public Picture getPic() {
+        return pic;
+    }
+
     public void display() {
+        if (Config.isFullScreen() && canScale){
+            zoomIn();
+        }
         Main.GUI_NODE.attachChild(pic);
     }
 
