@@ -29,12 +29,10 @@ public class MainPlayer extends Player {
         chaseCam.setZoomSensitivity(0.25f);
         chaseCam.cleanupWithInput(Main.INPUT_MANAGER);
         bombStatusBar.onUpdate(bombMax, bombLeft, 0f);
-        buffStatus = new BuffStatus(spatial);
     }
 
     public void onUpdate(float tpf) {
         super.onUpdate(tpf);
-        buffStatus.onUpdate(speedBuffDuration, shieldBuffDuration, bombExtendDuration, flameBuffDuration);
     }
 
     @Override

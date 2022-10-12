@@ -6,6 +6,7 @@ import Entities.BombList;
 import Entities.Player.PlayerList;
 import Input.PlayerInput;
 import Particles.BombExplosionList;
+import UI.PlayerStatus.BuffStatus;
 import UI.ScenceGraph;
 
 import java.io.FileNotFoundException;
@@ -39,6 +40,7 @@ public class InGame extends ScenceGraph {
         PlayerList.onUpdate(tpf);
         BombList.onUpdate(tpf);
         BombExplosionList.onUpdate(tpf);
+        BuffStatus.onUpdate();
     }
 
     @Override

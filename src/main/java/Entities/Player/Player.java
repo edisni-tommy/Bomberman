@@ -41,7 +41,6 @@ public class Player extends Entity {
 
     protected BombStatusBar bombStatusBar;
     protected ShieldStatus shieldStatus;
-    protected BuffStatus buffStatus;
 
 
     public Player(Vector3f position, String path) {
@@ -160,7 +159,6 @@ public class Player extends Entity {
         onBombExtend(tpf);
         bombStatusBar.onUpdate(bombLeft, bombMax, currentCooldownBomb);
         shieldStatus.onUpdate(isShield);
-        buffStatus.onUpdate(speedBuffDuration,shieldBuffDuration,bombExtendDuration,flameBuffDuration);
     }
 
     public void onCooldownBomb(float tpf) {
@@ -240,5 +238,21 @@ public class Player extends Entity {
 
     public void remove() {
         super.remove();
+    }
+
+    public float getBombExtendDuration() {
+        return bombExtendDuration;
+    }
+
+    public float getFlameDuration() {
+        return flameBuffDuration;
+    }
+
+    public float getShieldDuration() {
+        return shieldBuffDuration;
+    }
+
+    public float getSpeedDuration() {
+        return speedBuffDuration;
     }
 }
