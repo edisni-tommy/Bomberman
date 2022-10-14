@@ -18,7 +18,7 @@ public class PlayerInput {
     public static void initialize() {
         player = (MainPlayer)PlayerList.getMainPlayer();
         Main.INPUT_MANAGER.deleteMapping(SimpleApplication.INPUT_MAPPING_EXIT);
-        Main.INPUT_MANAGER.addMapping("Forward", new KeyTrigger(KeyInput.KEY_W));
+        Main.INPUT_MANAGER.addMapping("Forward", new KeyTrigger(KeyInput.KEY_W), new KeyTrigger(KeyInput.KEY_UP));
         Main.INPUT_MANAGER.addMapping("Backward", new KeyTrigger(KeyInput.KEY_S));
         Main.INPUT_MANAGER.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
         Main.INPUT_MANAGER.addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
