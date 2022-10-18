@@ -64,6 +64,10 @@ public class Text {
         this.hudText.setSize(size);
     }
 
+    public void setText(String text) {
+        this.hudText.setText(text);
+    }
+
     public float getSize() {
         return this.hudText.getSize();
     }

@@ -6,6 +6,7 @@ import Cores.Map;
 import Entities.BuffItem.*;
 import Entities.Entity;
 import Entities.Terrain.Portal;
+import UI.InGameGUI.InGame;
 import UI.Menu.MainMenu;
 import UI.ScenceGraphController;
 import com.jme3.audio.AudioData;
@@ -107,7 +108,8 @@ public class MainPlayer extends Player {
         if (entity instanceof Portal) {
             if (Map.enemyCount == 0) {
                 ScenceGraphController.remove();
-                ScenceGraphController.setScence(new MainMenu());
+                InGame.setLevel(InGame.getLevel() + 1);
+                ScenceGraphController.setScence(new InGame(InGame.getLevel()));
             }
         }
     }

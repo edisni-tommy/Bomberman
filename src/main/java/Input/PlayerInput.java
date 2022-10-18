@@ -19,14 +19,15 @@ public class PlayerInput {
         player = (MainPlayer)PlayerList.getMainPlayer();
         Main.INPUT_MANAGER.deleteMapping(SimpleApplication.INPUT_MAPPING_EXIT);
         Main.INPUT_MANAGER.addMapping("Forward", new KeyTrigger(KeyInput.KEY_W), new KeyTrigger(KeyInput.KEY_UP));
-        Main.INPUT_MANAGER.addMapping("Backward", new KeyTrigger(KeyInput.KEY_S));
-        Main.INPUT_MANAGER.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
-        Main.INPUT_MANAGER.addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
+        Main.INPUT_MANAGER.addMapping("Backward", new KeyTrigger(KeyInput.KEY_S), new KeyTrigger(KeyInput.KEY_DOWN));
+        Main.INPUT_MANAGER.addMapping("Left", new KeyTrigger(KeyInput.KEY_A), new KeyTrigger(KeyInput.KEY_LEFT));
+        Main.INPUT_MANAGER.addMapping("Right", new KeyTrigger(KeyInput.KEY_D), new KeyTrigger(KeyInput.KEY_RIGHT));
         Main.INPUT_MANAGER.addMapping("setBomb", new KeyTrigger(KeyInput.KEY_SPACE));
         Main.INPUT_MANAGER.addMapping("setting", new KeyTrigger(KeyInput.KEY_ESCAPE));
         Main.INPUT_MANAGER.addListener(actionListener, "Forward", "Backward", "Left", "Right", "setBomb", "setting");
         Main.INPUT_MANAGER.addListener(analogListener, "Forward", "Backward", "Left", "Right");
     }
+
 
     private static final ActionListener actionListener = new ActionListener() {
         @Override

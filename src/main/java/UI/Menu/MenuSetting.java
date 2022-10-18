@@ -8,6 +8,7 @@ import com.jme3.math.Vector2f;
 
 public class MenuSetting extends ScenceGraph {
     private static Image background;
+    private static Image wall;
     private static Button fullScreen;
     private static Button music;
     private static Button sound;
@@ -19,6 +20,7 @@ public class MenuSetting extends ScenceGraph {
 
     public void initialize() {
         background = new Image(new Vector2f(Main.WIDTH, Main.HEIGHT), "Textures/Menu/Lobby-Background.png");
+        wall = new Image(new Vector2f(250, 140), new Vector2f(580, 500), "Textures/Settings/mainwindow.png");
         fullScreen = new Button(new Vector2f(440, 500), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Full Screen") {
             @Override
             public void Selected() {
@@ -35,8 +37,35 @@ public class MenuSetting extends ScenceGraph {
                 Main.APP.restart();
             }
         };
-        music = new Button(new Vector2f(440, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Music");
-        sound = new Button(new Vector2f(440, 300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Sound");
+        String s = (Config.getMusic() > 0) ? "On" : "Off";
+        music = new Button(new Vector2f(440, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Music: " + s){
+            @Override
+            public void Selected() {
+                if (Config.getMusic() > 0) {
+                    Config.setMusic(0);
+                    getText().setText("Music: Off");
+                    MainMenu.music.stop();
+                } else {
+                    Config.setMusic(20);
+                    getText().setText("Music: On");
+                    MainMenu.music.setVolume(20);
+                    MainMenu.music.play();
+                }
+            }
+        };
+        s = (Config.getSound() > 0) ? "On" : "Off";
+        sound = new Button(new Vector2f(440, 300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Sound: "+ s){
+            @Override
+            public void Selected() {
+                if (Config.getSound() > 0) {
+                    Config.setSound(0);
+                    getText().setText("Sound: Off");
+                } else {
+                    Config.setSound(50);
+                    getText().setText("Sound: On");
+                }
+            }
+        };
         returnMenu = new Button(new Vector2f(440, 200), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Back") {
             @Override
             public void Selected() {
@@ -49,6 +78,7 @@ public class MenuSetting extends ScenceGraph {
     @Override
     public void display() {
         background.display();
+        //wall.display();
         fullScreen.display();
         music.display();
         sound.display();
@@ -59,6 +89,7 @@ public class MenuSetting extends ScenceGraph {
     @Override
     public void remove() {
         background.remove();
+        //wall.remove();
         fullScreen.remove();
         music.remove();
         sound.remove();
@@ -69,6 +100,7 @@ public class MenuSetting extends ScenceGraph {
     @Override
     public void scale() {
         background.zoomOut();
+        //wall.zoomOut();
         fullScreen.zoomOut();
         music.zoomOut();
         sound.zoomOut();

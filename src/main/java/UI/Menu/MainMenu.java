@@ -11,6 +11,7 @@ import com.jme3.math.Vector2f;
 
 public class MainMenu extends ScenceGraph {
     private static Image background;
+    private static Image logo;
     private static Button play;
     private static Button continuegame;
     private static Button setting;
@@ -23,7 +24,8 @@ public class MainMenu extends ScenceGraph {
 
     public void initialize() {
         background = new Image(new Vector2f(Main.WIDTH, Main.HEIGHT), "Textures/Menu/Lobby-Background.png");
-        play = new Button(new Vector2f(440, 500), new Vector2f(200, 75), "Textures/Menu/button_long.png", "New game") {
+        logo = new Image(new Vector2f(350, 520), new Vector2f(400, 150), "Textures/Menu/logo.png");
+        play = new Button(new Vector2f(440, 450), new Vector2f(200, 75), "Textures/Menu/button_long.png", "New game") {
             @Override
             public void Selected() {
                 setDisplayed(false);
@@ -31,7 +33,7 @@ public class MainMenu extends ScenceGraph {
                 ScenceGraphController.setScence(new InGame(1));
             }
         };
-        continuegame = new Button(new Vector2f(440, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Continue") {
+        continuegame = new Button(new Vector2f(440, 350), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Continue") {
             @Override
             public void Selected() {
                 setDisplayed(false);
@@ -39,7 +41,7 @@ public class MainMenu extends ScenceGraph {
                 ScenceGraphController.setScence(new InGame(Config.getLevel()));
             }
         };
-        setting = new Button(new Vector2f(440, 300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Setting") {
+        setting = new Button(new Vector2f(440, 250), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Setting") {
             @Override
             public void Selected() {
                 setDisplayed(false);
@@ -47,7 +49,7 @@ public class MainMenu extends ScenceGraph {
                 ScenceGraphController.setScence(new MenuSetting());
             }
         };
-        exit = new Button(new Vector2f(440, 200), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Exit") {
+        exit = new Button(new Vector2f(440, 150), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Exit") {
             @Override
             public void Selected() {
                 Main.APP.stop();
@@ -62,6 +64,7 @@ public class MainMenu extends ScenceGraph {
     @Override
     public void display() {
         background.display();
+        logo.display();
         play.display();
         continuegame.display();
         setting.display();
@@ -72,6 +75,7 @@ public class MainMenu extends ScenceGraph {
     @Override
     public void remove() {
         background.remove();
+        logo.remove();
         play.remove();
         continuegame.remove();
         setting.remove();

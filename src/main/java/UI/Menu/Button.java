@@ -44,6 +44,10 @@ public class Button extends Image {
         On = on;
     }
 
+    public Text getText() {
+        return text;
+    }
+
     private final ActionListener actionListener = (name, keyPressed, tpf) -> {
         if (On) {
             if (keyPressed && name.equals("LeftClick")) {

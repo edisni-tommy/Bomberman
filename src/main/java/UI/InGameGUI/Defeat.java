@@ -15,6 +15,7 @@ import org.lwjgl.Sys;
 
 public class Defeat extends ScenceGraph {
     private static Image background;
+    private static Image lose;
     private static Button home;
     private static Button tryAgain;
 
@@ -26,8 +27,9 @@ public class Defeat extends ScenceGraph {
 
     public void initialize() {
         Main.GUI_NODE.detachAllChildren();
-        background = new Image(new Vector2f(380, 260), new Vector2f(360, 240), "Textures/Menu/Lobby-Background.png");
-        home = new Button(new Vector2f(460, 400), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Home") {
+        background = new Image(new Vector2f(380, 260), new Vector2f(360, 240), "Textures/Menu/announcement_background.png");
+        lose = new Image(new Vector2f(460, 375), new Vector2f(200, 100), "Textures/Menu/lose.png");
+        home = new Button(new Vector2f(400, 300), new Vector2f(125, 50), "Textures/Menu/button_long.png", "Home") {
             @Override
             public void Selected() {
                 Config.setLevel(InGame.getLevel());
@@ -36,7 +38,7 @@ public class Defeat extends ScenceGraph {
                 ScenceGraphController.setScence(new MainMenu());
             }
         };
-        tryAgain = new Button(new Vector2f(460, 300), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Try Again") {
+        tryAgain = new Button(new Vector2f(600, 300), new Vector2f(125, 50), "Textures/Menu/button_long.png", "Try Again") {
             @Override
             public void Selected() {
                 ScenceGraphController.removeExtension();
@@ -52,6 +54,7 @@ public class Defeat extends ScenceGraph {
     public void display() {
         defeat.play();
         background.display();
+        lose.display();
         tryAgain.display();
         home.display();
     }
@@ -59,6 +62,7 @@ public class Defeat extends ScenceGraph {
     @Override
     public void remove() {
         background.remove();
+        lose.remove();
         home.remove();
         tryAgain.remove();
     }

@@ -12,9 +12,7 @@ import Entities.Terrain.Grass;
 import Entities.Terrain.Rock;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Collection;
 import java.util.Scanner;
 import java.util.Vector;
@@ -29,7 +27,7 @@ public class Map {
     public static int enemyCount;
 
 
-    public static void initalize(int level) throws FileNotFoundException {
+    public static void initalize(int level) throws IOException {
         hasPortal = false;
         containerCount = 0;
         enemyCount =0;
@@ -40,12 +38,14 @@ public class Map {
                 Grass grass = new Grass(new Vector3f(i * 2f, 0, j * 2f));
             }
         }
+        if (level > 1) generateMap(level);
         loadMapFromFile("assets/Level/level" + level + ".txt");
     }
 
     public static void loadMapFromFile(String path) throws FileNotFoundException {
         File text = new File(path);
         Scanner IN = new Scanner(text);
+        IN.nextLine();
         for(int i = 0; i < 20; ++ i) {
             String s = IN.nextLine();
             int cnt = 0;
@@ -113,5 +113,90 @@ public class Map {
 
     public static boolean valid(int x, int y) {
         return 0 <= x && 0 <= y && 20 > x && 20 > y;
+    }
+
+    public static boolean canReach(int x, int y) {
+        if (valid(x+1, y+1)) {
+            if (map[x+1][y+1] == ' ') return true;
+        }
+        if (valid(x+1, y)) {
+            if (map[x+1][y] == ' ') return true;
+        }
+        if (valid(x-1, y)) {
+            if (map[x-1][y] == ' ') return true;
+        }
+        if (valid(x-1,y-1)) {
+            if (map[x-1][y-1] == ' ') return true;
+        }
+        return false;
+    }
+
+    public static void generateMap(int level) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("assets/Level/level" + level + ".txt"));
+        bw.write(level + " 20 20\n");
+        StringBuilder line = new StringBuilder();
+        int numContainer = 106 ;
+        int numBlock  = (int) Math.round(Math.random() * (60 - 43 + 1)) + 43;
+        int numEnemy = (level % 2 == 0) ? level + 1 : level - 1;
+        int numEasyBot = (level % 2 == 0) ? Math.min(numEnemy/2, (numEnemy-1)/2) : Math.max(numEnemy/2, (numEnemy+1)/2);
+        int numNormalBot = numEnemy - numEasyBot;
+        map = new char[20][20];
+        entity = new Entity[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                map[i][j] = ' ';
+            }
+        }
+        while (numBlock > 0) {
+            int row = (int) Math.floor(Math.random() * 20);
+            int col = (int) Math.floor(Math.random() * 20);
+            if (map[row][col] == ' ' && canReach(row, col)) {
+                map[row][col] = '#';
+                numBlock--;
+            }
+        }
+
+       while (numContainer > 0) {
+            int row = (int) Math.floor(Math.random() * 20);
+            int col = (int) Math.floor(Math.random() * 20);
+            if (map[row][col] == ' ' && canReach(row, col)) {
+                map[row][col] = '*';
+                numContainer--;
+            }
+        }
+        while (numNormalBot > 0) {
+            int row = (int) Math.floor(Math.random() * 20);
+            int col = (int) Math.floor(Math.random() * 20);
+            if (map[row][col] == ' ' && canReach(row, col)) {
+                map[row][col] = '1';
+                numNormalBot--;
+            }
+        }
+        while (numEasyBot > 0) {
+            int row = (int) Math.floor(Math.random() * 20);
+            int col = (int) Math.floor(Math.random() * 20);
+            if (map[row][col] == ' ' && canReach(row, col)) {
+                map[row][col] = '2';
+                numEasyBot--;
+            }
+        }
+
+        while (true) {
+            int row = (int) Math.floor(Math.random() * 20);
+            int col = (int) Math.floor(Math.random() * 20);
+            if (map[row][col] == ' ' && canReach(row, col)) {
+                map[row][col] = 'p';
+                break;
+            }
+        }
+
+        for (int i = 0; i < 20; i++) {
+            line = new StringBuilder();
+            for (int j = 0; j < 20; j++) {
+                line.append(map[i][j]);
+            }
+            bw.write(line + "\n");
+        }
+        bw.close();
     }
 }

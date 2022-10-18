@@ -12,8 +12,10 @@ import UI.PlayerStatus.BuffStatus;
 import UI.ScenceGraph;
 import com.jme3.audio.AudioData;
 import com.jme3.audio.AudioNode;
+import com.jme3.audio.AudioSource;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class InGame extends ScenceGraph {
     private final static AudioNode music = new AudioNode(Main.ASSET_MANAGER, "Sounds/BGM.wav", AudioData.DataType.Stream);
@@ -40,6 +42,10 @@ public class InGame extends ScenceGraph {
         PlayerInput.setActive(displayed);
         if (!displayed) {
            music.pause();
+        } else {
+            if (music.getStatus().equals(AudioSource.Status.Paused)) {
+                music.play();
+            }
         }
     }
 
@@ -62,6 +68,8 @@ public class InGame extends ScenceGraph {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         //SystemInput.initialize();
         PlayerInput.initialize();
