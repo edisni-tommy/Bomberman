@@ -7,6 +7,8 @@ import UI.Menu.Image;
 import UI.Menu.MainMenu;
 import UI.ScenceGraph;
 import UI.ScenceGraphController;
+import com.jme3.audio.AudioData;
+import com.jme3.audio.AudioNode;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.math.Vector2f;
 import org.lwjgl.Sys;
@@ -15,6 +17,8 @@ public class Defeat extends ScenceGraph {
     private static Image background;
     private static Button home;
     private static Button tryAgain;
+
+   private final static AudioNode defeat = new AudioNode(Main.ASSET_MANAGER, "Sounds/Defeat.ogg", AudioData.DataType.Buffer);
 
     public Defeat() {
         initialize();
@@ -38,13 +42,15 @@ public class Defeat extends ScenceGraph {
                 ScenceGraphController.removeExtension();
                 ScenceGraphController.remove();
                 ScenceGraphController.setScence(new InGame(InGame.getLevel()));
-                ;
             }
         };
+        defeat.setVolume(Config.getSound());
+        defeat.setPositional(false);
     }
 
     @Override
     public void display() {
+        defeat.play();
         background.display();
         tryAgain.display();
         home.display();

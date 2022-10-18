@@ -1,5 +1,7 @@
 package Entities;
 
+import Cores.Config;
+import Cores.Main;
 import Cores.Map;
 import Entities.BuffItem.*;
 import Entities.Player.MainPlayer;
@@ -13,6 +15,8 @@ import Particles.BombSpark;
 import UI.InGameGUI.Defeat;
 import UI.InGameGUI.InGame;
 import UI.ScenceGraphController;
+import com.jme3.audio.AudioData;
+import com.jme3.audio.AudioNode;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
@@ -24,7 +28,7 @@ public class Bomb extends Entity {
 
     private float timeExplore = 4.0f;
     private final int flame;
-
+    private final static AudioNode exploreSound = new AudioNode(Main.ASSET_MANAGER, "Sounds/Explosion.ogg", AudioData.DataType.Buffer);
     private final BombSpark bombSpark;
 
 
@@ -61,6 +65,10 @@ public class Bomb extends Entity {
     }
 
     private void explore() {
+        exploreSound.setVolume(Config.getSound());
+        exploreSound.setLocalTranslation(getPosition());
+        exploreSound.stop();
+        exploreSound.play();
         Vector2f position = getCoord();
         int x = (int) position.x;
         int y = (int) position.y;

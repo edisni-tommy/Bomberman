@@ -1,11 +1,14 @@
 package Entities.Player;
 
+import Cores.Config;
+import Cores.Main;
 import Cores.Map;
 import Entities.Bomb;
 import Entities.Entity;
 import UI.PlayerStatus.BombStatusBar;
-import UI.PlayerStatus.BuffStatus;
 import UI.PlayerStatus.ShieldStatus;
+import com.jme3.audio.AudioData;
+import com.jme3.audio.AudioNode;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
@@ -42,6 +45,7 @@ public class Player extends Entity {
     protected BombStatusBar bombStatusBar;
     protected ShieldStatus shieldStatus;
 
+    private static final AudioNode setBombSound = new AudioNode(Main.ASSET_MANAGER, "Sounds/PlaceBomb.ogg", AudioData.DataType.Buffer);
 
     public Player(Vector3f position, String path) {
         super(position, path);
@@ -131,11 +135,13 @@ public class Player extends Entity {
         if (bombLeft == 0) {
             return;
         }
-
         Vector2f position = getCoord();
         int x = (int)position.x;
         int y = (int)position.y;
         if (Map.getObject(x, y) == null) {
+            setBombSound.setVolume(Config.getSound());
+            setBombSound.stop();
+            setBombSound.play();
             bombLeft -= 1;
             Map.setObject(x, y, new Bomb(new Vector3f(x * 2f, 1, y * 2f), flame));
         }

@@ -6,14 +6,15 @@ import java.io.*;
 
 public class Config {
     private static boolean fullScreen;
-    private static int music = 0;
-    private static int sound = 0;
+    private static int music = 20;
+    private static int sound = 50;
     private static int level;
 
     public static void saveConfig() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("config.txt"));
-            //Full screen
+            //ScreenMode
+            bw.write("[Screen_Mode]: ");
             if (isFullScreen()) {
                 bw.write("On");
             } else {
@@ -21,12 +22,15 @@ public class Config {
             }
             bw.newLine();
             //Music
+            bw.write("[Music_Volume]: ");
             bw.write(String.valueOf(getMusic()));
             bw.newLine();
             //Sound
+            bw.write("[Sound_Volume]: ");
             bw.write(String.valueOf(getSound()));
             bw.newLine();
             //Level
+            bw.write("[Level]: ");
             setLevel(InGame.getLevel());
             bw.write(String.valueOf(getLevel()));
             bw.newLine();
@@ -39,18 +43,25 @@ public class Config {
     public static void loadConfig() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("config.txt"));
-            String s = br.readLine();
-            //Full screen
-            setFullScreen(s.equals("On"));
-            //Music volume
-            s = br.readLine();
-            setMusic(Integer.parseInt(s));
-            //Sound
-            s = br.readLine();
-            setSound(Integer.parseInt(s));
-            //Level
-            s = br.readLine();
-            setLevel(Integer.parseInt(s));
+            String line = br.readLine();
+            while (line != null) {
+                String[] types = line.split(": ");
+                switch (types[0]) {
+                    case "[Screen_Mode]":
+                        setFullScreen(types[1].equals("On"));
+                        break;
+                    case "[Music_Volume]":
+                        setMusic(Integer.parseInt(types[1]));
+                        break;
+                    case "[Sound_Volume":
+                        setSound(Integer.parseInt(types[1]));
+                        break;
+                    case "[Level]":
+                        setLevel(Integer.parseInt(types[1]));
+                        break;
+                }
+                line = br.readLine();
+            }
             br.close();
         } catch (Exception e) {
             e.printStackTrace();

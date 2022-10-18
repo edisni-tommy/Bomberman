@@ -18,7 +18,7 @@ public class MenuSetting extends ScenceGraph {
     }
 
     public void initialize() {
-        background = new Image(new Vector2f(Main.APP_SETTINGS.getWidth(), Main.APP_SETTINGS.getHeight()), "Textures/Menu/Lobby-Background.png");
+        background = new Image(new Vector2f(Main.WIDTH, Main.HEIGHT), "Textures/Menu/Lobby-Background.png");
         fullScreen = new Button(new Vector2f(440, 500), new Vector2f(200, 75), "Textures/Menu/button_long.png", "Full Screen") {
             @Override
             public void Selected() {
@@ -53,6 +53,7 @@ public class MenuSetting extends ScenceGraph {
         music.display();
         sound.display();
         returnMenu.display();
+        MainMenu.music.play();
     }
 
     @Override
@@ -62,6 +63,7 @@ public class MenuSetting extends ScenceGraph {
         music.remove();
         sound.remove();
         returnMenu.remove();
+        MainMenu.music.pause();
     }
 
     @Override

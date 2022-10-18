@@ -42,7 +42,7 @@ public class BombStatusBar extends PlayerStatus {
         if (Config.isFullScreen()) {
             distance2Filled = (60f/maxBomb) * Main.SCALEWIDTH;
             position.x -= 40;
-            position.z += 100;
+            position.z += 300;
             position.y += 40;
         }
         float x = position.x;

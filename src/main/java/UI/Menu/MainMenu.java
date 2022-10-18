@@ -5,6 +5,8 @@ import Cores.Main;
 import UI.InGameGUI.InGame;
 import UI.ScenceGraph;
 import UI.ScenceGraphController;
+import com.jme3.audio.AudioData;
+import com.jme3.audio.AudioNode;
 import com.jme3.math.Vector2f;
 
 public class MainMenu extends ScenceGraph {
@@ -13,13 +15,14 @@ public class MainMenu extends ScenceGraph {
     private static Button continuegame;
     private static Button setting;
     private static Button exit;
+    public final static AudioNode music = new AudioNode(Main.ASSET_MANAGER, "Sounds/Lobby.wav", AudioData.DataType.Stream);
 
     public MainMenu() {
         initialize();
     }
 
     public void initialize() {
-        background = new Image(new Vector2f(Main.APP_SETTINGS.getWidth(), Main.APP_SETTINGS.getHeight()), "Textures/Menu/Lobby-Background.png");
+        background = new Image(new Vector2f(Main.WIDTH, Main.HEIGHT), "Textures/Menu/Lobby-Background.png");
         play = new Button(new Vector2f(440, 500), new Vector2f(200, 75), "Textures/Menu/button_long.png", "New game") {
             @Override
             public void Selected() {
@@ -51,6 +54,9 @@ public class MainMenu extends ScenceGraph {
                 Config.saveConfig();
             }
         };
+        music.setVolume(Config.getMusic());
+        music.setLooping(true);
+        music.setPositional(false);
     }
 
     @Override
@@ -60,6 +66,7 @@ public class MainMenu extends ScenceGraph {
         continuegame.display();
         setting.display();
         exit.display();
+        music.play();
     }
 
     @Override
@@ -69,6 +76,7 @@ public class MainMenu extends ScenceGraph {
         continuegame.remove();
         setting.remove();
         exit.remove();
+        music.pause();
     }
 
     @Override

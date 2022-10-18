@@ -3,8 +3,6 @@ package Entities.BuffItem;
 import Cores.Main;
 import Entities.Entity;
 import Particles.BuffItemEffect;
-import com.jme3.effect.ParticleEmitter;
-import com.jme3.effect.ParticleMesh;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.FastMath;
@@ -14,7 +12,6 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
-import com.jme3.ui.Picture;
 
 public abstract class BuffItem extends Entity {
     private BuffItemEffect item;

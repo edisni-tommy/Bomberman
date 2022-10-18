@@ -1,23 +1,23 @@
 package Entities.Player;
 
+import Cores.Config;
 import Cores.Main;
 import Cores.Map;
-import Entities.BuffItem.BombExtend;
-import Entities.BuffItem.FlameBuff;
-import Entities.BuffItem.ShieldBuff;
-import Entities.BuffItem.SpeedBuff;
+import Entities.BuffItem.*;
 import Entities.Entity;
 import Entities.Terrain.Portal;
 import UI.Menu.MainMenu;
-import UI.PlayerStatus.BuffStatus;
 import UI.ScenceGraphController;
+import com.jme3.audio.AudioData;
+import com.jme3.audio.AudioNode;
 import com.jme3.input.ChaseCamera;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import UI.PlayerStatus.BombStatusBar;
 
 public class MainPlayer extends Player {
+    private final static AudioNode BuffItem = new AudioNode(Main.ASSET_MANAGER, "Sounds/Powerup.ogg", AudioData.DataType.Buffer);
+
     public MainPlayer(Vector3f position) {
         super(position, "Models/Player/player.gltf");
         ChaseCamera chaseCam = new ChaseCamera(Main.CAM, spatial, Main.INPUT_MANAGER);
@@ -29,6 +29,7 @@ public class MainPlayer extends Player {
         chaseCam.setZoomSensitivity(0.25f);
         chaseCam.cleanupWithInput(Main.INPUT_MANAGER);
         bombStatusBar.onUpdate(bombMax, bombLeft, 0f);
+        BuffItem.setVolume(Config.getSound());
     }
 
     public void onUpdate(float tpf) {
@@ -75,20 +76,28 @@ public class MainPlayer extends Player {
             return;
         }
         if (buffItem instanceof SpeedBuff) {
+            setSound();
             setSpeedBuff();
             Map.remove((int)position.x, (int)position.y);
         } else if (buffItem instanceof FlameBuff) {
+            setSound();
             setFlameBuff();
             Map.remove((int)position.x, (int)position.y);
         } else if (buffItem instanceof BombExtend) {
+            setSound();
             setBombExtend();
             Map.remove((int)position.x, (int)position.y);
         } else if (buffItem instanceof ShieldBuff) {
+            setSound();
             setShieldBuff();
             Map.remove((int)position.x, (int)position.y);
         }
     }
 
+    public void setSound() {
+        BuffItem.stop();
+        BuffItem.play();
+    }
     public void checkPortal() {
         Vector2f position = getCoord();
         Entity entity = Map.getObject((int)position.x, (int)position.y);
