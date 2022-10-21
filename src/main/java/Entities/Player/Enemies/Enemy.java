@@ -207,8 +207,8 @@ public class Enemy extends Player {
         }
         Vector3f MainPlayerPosition = mainPlayer.getPosition();
         Vector3f position = getPosition();
-        if(distance(position, MainPlayerPosition) <= 1.5f) {
-            //PlayerList.remove(mainPlayer);
+        if(distance(position, MainPlayerPosition) <= 1f) {
+            PlayerList.remove(mainPlayer);
             ScenceGraphController.setExtension(new Defeat());
         }
     }
