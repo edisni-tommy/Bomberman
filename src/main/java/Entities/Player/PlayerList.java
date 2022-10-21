@@ -1,20 +1,29 @@
 package Entities.Player;
 
-import Cores.Main;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PlayerList {
     private static List<Player> playerList = new ArrayList<>();
+    private static Set<Player> removeList = new HashSet<>();
 
     public static void add(Player player) {
         playerList.add(player);
     }
 
     public static void remove(Player player) {
-        playerList.remove(player);
-        player.remove();
+        removeList.add(player);
+    }
+
+    private static void Remove() {
+        for (Player player: removeList) {
+            playerList.remove(player);
+            player.remove();
+        }
+        removeList.clear();
     }
 
     public static void removeAll() {
@@ -38,5 +47,6 @@ public class PlayerList {
         for (Player player: playerList) {
             player.onUpdate(tpf);
         }
+        Remove();
     }
 }
