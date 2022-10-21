@@ -48,10 +48,6 @@ public class Text {
         }
     }
 
-    public void setHudText(String text) {
-        this.hudText.setText(text);
-    }
-
     public void setPosition(Vector2f position) {
         this.hudText.setBox(new Rectangle(position.x, position.y, position.x + size.x, position.y + size.y));
     }
@@ -68,6 +64,9 @@ public class Text {
         this.hudText.setText(text);
     }
 
+    public void setAlignment(BitmapFont.Align type) {
+        hudText.setAlignment(type);
+    }
     public float getSize() {
         return this.hudText.getSize();
     }
