@@ -35,8 +35,8 @@ public class PlayerList {
     }
 
     public static void onUpdate(float tpf) {
-        for (Player player: playerList) {
-            player.onUpdate(tpf);
+        for (int i = 0; i < playerList.size(); i++) {
+                playerList.get(i).onUpdate(tpf);
         }
     }
 }

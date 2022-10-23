@@ -40,7 +40,6 @@ public class Map {
             }
         }
         if (level > 30) generateMap(level);
-        // (int i = 1  ; i <= 30; i++) generateMap(i);
         loadMapFromFile("assets/Level/level" + level + ".txt");
     }
 

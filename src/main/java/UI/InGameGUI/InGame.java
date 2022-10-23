@@ -25,8 +25,8 @@ public class InGame extends ScenceGraph {
     private final static AudioNode music = new AudioNode(Main.ASSET_MANAGER, "Sounds/BGM.wav", AudioData.DataType.Stream);
     private static int level = 1;
 
-    private Text curLevel = new Text("Level " + level, ColorRGBA.Black, new Vector2f(20, Main.HEIGHT - 60), new Vector2f(200 , 75));
-    private Text remainEnemy = new Text("Enemies: 0", ColorRGBA.Black, new Vector2f(20, Main.HEIGHT - 100), new Vector2f(200, 75));
+    private Text curLevel = new Text("Level " + level, ColorRGBA.Black, new Vector2f(20, Main.HEIGHT - 70), new Vector2f(200 , 75));
+    private Text remainEnemy = new Text("Enemies: 0", ColorRGBA.Black, new Vector2f(20, Main.HEIGHT - 110), new Vector2f(200, 75));
 
     public InGame(int level) {
         InGame.level = level;
@@ -55,6 +55,8 @@ public class InGame extends ScenceGraph {
         } else {
             if (music.getStatus().equals(AudioSource.Status.Paused)) {
                 music.play();
+                curLevel.display();
+                remainEnemy.display();
             }
         }
     }
@@ -76,9 +78,6 @@ public class InGame extends ScenceGraph {
         GameEnvironment.initalize();
         try {
             Map.initalize(level);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

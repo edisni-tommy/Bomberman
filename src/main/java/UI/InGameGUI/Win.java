@@ -9,27 +9,26 @@ import UI.ScenceGraph;
 import UI.ScenceGraphController;
 import com.jme3.audio.AudioData;
 import com.jme3.audio.AudioNode;
-import com.jme3.input.controls.ActionListener;
 import com.jme3.math.Vector2f;
-import org.lwjgl.Sys;
 
-public class Defeat extends ScenceGraph {
+public class Win extends ScenceGraph {
     private static Image background;
-    private static Image lose;
+    private static Image win;
     private static Button home;
-    private static Button tryAgain;
+    private static Button playAgain;
+    private static Button nextLevel;
 
-   private final static AudioNode defeat = new AudioNode(Main.ASSET_MANAGER, "Sounds/Defeat.ogg", AudioData.DataType.Buffer);
+    private final static AudioNode victory = new AudioNode(Main.ASSET_MANAGER, "Sounds/Victory.ogg", AudioData.DataType.Buffer);
 
-    public Defeat() {
+    public Win() {
         initialize();
     }
 
     public void initialize() {
         Main.GUI_NODE.detachAllChildren();
         background = new Image(new Vector2f(380, 260), new Vector2f(360, 240), "Textures/Menu/announcement_background.png");
-        lose = new Image(new Vector2f(460, 375), new Vector2f(200, 100), "Textures/Menu/lose.png");
-        home = new Button(new Vector2f(433, 300), new Vector2f(100, 50), "Textures/Menu/button_long.png", "Home") {
+        win = new Image(new Vector2f(410, 350), new Vector2f(300, 150), "Textures/Menu/win.png");
+        home = new Button(new Vector2f(390, 300), new Vector2f(100, 50), "Textures/Menu/button_long.png", "Home") {
             @Override
             public void Selected() {
                 Config.setLevel(InGame.getLevel());
@@ -38,7 +37,7 @@ public class Defeat extends ScenceGraph {
                 ScenceGraphController.setScence(new MainMenu());
             }
         };
-        tryAgain = new Button(new Vector2f(586, 300), new Vector2f(100, 50), "Textures/Menu/button_long.png", "Try Again") {
+        playAgain = new Button(new Vector2f(510, 300), new Vector2f(100, 50), "Textures/Menu/button_long.png", "Play Again") {
             @Override
             public void Selected() {
                 ScenceGraphController.removeExtension();
@@ -46,25 +45,35 @@ public class Defeat extends ScenceGraph {
                 ScenceGraphController.setScence(new InGame(InGame.getLevel()));
             }
         };
-        defeat.setVolume(Config.getSound());
-        defeat.setPositional(false);
+        nextLevel = new Button(new Vector2f(630,300), new Vector2f(100, 50), "Textures/Menu/button_long.png", "Next Level") {
+            @Override
+            public void Selected() {
+                ScenceGraphController.removeExtension();
+                ScenceGraphController.remove();
+                ScenceGraphController.setScence(new InGame(InGame.getLevel() + 1));
+            }
+        };
+        victory.setVolume(Config.getSound());
+        victory.setPositional(false);
     }
 
     @Override
     public void display() {
-        defeat.play();
+        victory.play();
         background.display();
-        lose.display();
-        tryAgain.display();
+        win.display();
+        playAgain.display();
+        nextLevel.display();
         home.display();
     }
 
     @Override
     public void remove() {
         background.remove();
-        lose.remove();
+        win.remove();
         home.remove();
-        tryAgain.remove();
+        nextLevel.remove();
+        playAgain.remove();
     }
 
     @Override
