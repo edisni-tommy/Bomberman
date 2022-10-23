@@ -66,8 +66,8 @@ public class InGame extends ScenceGraph {
         if (!isDisplayed()) {
             return;
         }
-        PlayerList.onUpdate(tpf);
         BombList.onUpdate(tpf);
+        PlayerList.onUpdate(tpf);
         BombExplosionList.onUpdate(tpf);
         BuffStatus.onUpdate();
         remainEnemy.setText("Enemies: " + Map.enemyCount);
