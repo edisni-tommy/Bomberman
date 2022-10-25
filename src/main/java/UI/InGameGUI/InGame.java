@@ -8,6 +8,7 @@ import Entities.BombList;
 import Entities.Player.PlayerList;
 import Input.PlayerInput;
 import Particles.BombExplosionList;
+import Particles.EffectList;
 import UI.Menu.Text;
 import UI.PlayerStatus.BuffStatus;
 import UI.ScenceGraph;
@@ -68,7 +69,7 @@ public class InGame extends ScenceGraph {
         }
         BombList.onUpdate(tpf);
         PlayerList.onUpdate(tpf);
-        BombExplosionList.onUpdate(tpf);
+        EffectList.onUpdate(tpf);
         BuffStatus.onUpdate();
         remainEnemy.setText("Enemies: " + Map.enemyCount);
     }

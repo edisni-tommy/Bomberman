@@ -47,6 +47,7 @@ public class Player extends Entity {
 
     private static final AudioNode setBombSound = new AudioNode(Main.ASSET_MANAGER, "Sounds/PlaceBomb.ogg", AudioData.DataType.Buffer);
 
+    private boolean moving = false;
     public Player(Vector3f position, String path) {
         super(position, path);
         PlayerList.add(this);
@@ -143,7 +144,11 @@ public class Player extends Entity {
             setBombSound.stop();
             setBombSound.play();
             bombLeft -= 1;
-            Map.setObject(x, y, new Bomb(new Vector3f(x * 2f, 1, y * 2f), flame));
+            if(isFlameBuff()) {
+                Map.setObject(x, y, new Bomb(new Vector3f(x * 2f, 1, y * 2f), flame, "Models/BombUpgrade/bomb_upgrade.obj"));
+            } else {
+                Map.setObject(x, y, new Bomb(new Vector3f(x * 2f, 1, y * 2f), flame, "Models/Bomb/bomb.obj"));
+            }
         }
     }
 
@@ -238,6 +243,9 @@ public class Player extends Entity {
         this.isShield = false;
     }
 
+    public boolean isFlameBuff() {
+        return this.flameBuffDuration > 0;
+    }
     public boolean isSpeedBuff() {
         return this.speedBuffDuration > 0;
     }

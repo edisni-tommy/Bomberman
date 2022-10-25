@@ -6,6 +6,7 @@ import Cores.Map;
 import Entities.BuffItem.*;
 import Entities.Entity;
 import Entities.Terrain.Portal;
+import Particles.SpeedBuffEffect;
 import UI.InGameGUI.InGame;
 import UI.InGameGUI.Win;
 import UI.Menu.MainMenu;
@@ -36,11 +37,15 @@ public class MainPlayer extends Player {
 
     public void onUpdate(float tpf) {
         super.onUpdate(tpf);
+
     }
 
     @Override
     public void moveForward(float tpf) {
         super.moveForward(tpf);
+        if (isSpeedBuff()) {
+            SpeedBuffEffect a = new SpeedBuffEffect(getPosition());
+        }
         checkPortal();
         checkBuffItem();
     }
@@ -48,6 +53,9 @@ public class MainPlayer extends Player {
     @Override
     public void moveBackward(float tpf) {
         super.moveBackward(tpf);
+        if (isSpeedBuff()) {
+            SpeedBuffEffect a = new SpeedBuffEffect(getPosition());
+        }
         checkPortal();
         checkBuffItem();
     }
@@ -55,6 +63,9 @@ public class MainPlayer extends Player {
     @Override
     public void moveLeft(float tpf) {
         super.moveLeft(tpf);
+        if (isSpeedBuff()) {
+            SpeedBuffEffect a = new SpeedBuffEffect(getPosition());
+        }
         checkPortal();
         checkBuffItem();
     }
@@ -62,6 +73,9 @@ public class MainPlayer extends Player {
     @Override
     public void moveRight(float tpf) {
         super.moveRight(tpf);
+        if (isSpeedBuff()) {
+            SpeedBuffEffect a = new SpeedBuffEffect(getPosition());
+        }
         checkPortal();
         checkBuffItem();
     }

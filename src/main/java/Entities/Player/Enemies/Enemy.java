@@ -26,6 +26,8 @@ public class Enemy extends Player {
     private Vector2f nextMove;
     private Vector2f lastPosition;
 
+    protected float direction = 0;
+
     public Enemy(Vector3f position, String path) {
         super(position, path);
         this.speed = 1.0f;
@@ -135,16 +137,16 @@ public class Enemy extends Player {
         float slopeY = nextMove.y * 2f - position.z;
         Vector2f next;
         if (slopeX > 0) {
-            Rotate(-FastMath.PI/2);
+            Rotate(-FastMath.PI/2 + direction);
             next = new Vector2f(Math.min(position.x + speed * tpf, nextMove.x * 2f), position.z);
         } else if (slopeX < 0) {
-            Rotate(FastMath.PI/2);
+            Rotate(FastMath.PI/2 + direction);
             next = new Vector2f(Math.max(position.x - speed * tpf, nextMove.x * 2f), position.z);
         } else if (slopeY > 0) {
-            Rotate(FastMath.PI);
+            Rotate(FastMath.PI + direction);
             next = new Vector2f(position.x, Math.min(position.z + speed * tpf, nextMove.y * 2f));
         } else {
-            Rotate(0);
+            Rotate(0 + direction);
             next = new Vector2f(position.x, Math.max(position.z - speed * tpf, nextMove.y * 2f));
         }
         setPosition(new Vector3f(next.x, 1, next.y));
@@ -162,16 +164,16 @@ public class Enemy extends Player {
     }
 
     private boolean canMoveIn(int x, int y) {
-        for (Player player : PlayerList.getList()) {
-            if (player instanceof Enemy) {
-                if(player.equals(this)) {
-                    continue;
-                }
-                if (player.getCoord().equals(new Vector2f(x, y))) {
-                    return false;
-                }
-            }
-        }
+//        for (Player player : PlayerList.getList()) {
+//            if (player instanceof Enemy) {
+//                if(player.equals(this)) {
+//                    continue;
+//                }
+//                if (player.getCoord().equals(new Vector2f(x, y))) {
+//                    return false;
+//                }
+//            }
+//        }
         return valid(x, y);
     }
 

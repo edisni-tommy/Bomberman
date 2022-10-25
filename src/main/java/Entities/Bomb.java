@@ -32,8 +32,8 @@ public class Bomb extends Entity {
     private final BombSpark bombSpark;
 
 
-    public Bomb(Vector3f position, int flame) {
-        super(position, "Models/Bomb/bomb.obj");
+    public Bomb(Vector3f position, int flame, String path) {
+        super(position, path);
         this.flame = flame;
         bombSpark = new BombSpark(this.spatial);
         BombList.add(this);

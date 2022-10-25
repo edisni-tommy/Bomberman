@@ -1,5 +1,6 @@
 package Entities.Player.Enemies;
 
+import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 
 public class NormalBot extends Enemy {
@@ -10,6 +11,7 @@ public class NormalBot extends Enemy {
 
     public NormalBot(Vector3f position) {
         super(position, "Models/Monster/spider.obj");
+        this.direction = FastMath.PI;
     }
 
     public void onUpdate(float tpf) {

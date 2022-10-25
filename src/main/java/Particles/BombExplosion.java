@@ -7,11 +7,8 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 
-public class BombExplosion {
+public class BombExplosion extends Effect {
 
-    private ParticleEmitter particle;
-    private final long DURATION = 1000;
-    private final long startTime;
     public BombExplosion(Vector3f position) {
         super();
         particle = new ParticleEmitter("bombSpark", ParticleMesh.Type.Triangle, 15);
@@ -32,18 +29,8 @@ public class BombExplosion {
         particle.getParticleInfluencer().setInitialVelocity(new Vector3f(0, 1, 0));
         particle.getParticleInfluencer().setVelocityVariation(0.5f);
         particle.emitAllParticles();
+        DURATION = 1000;
         Main.ROOT_NODE.attachChild(particle);
-        startTime = System.currentTimeMillis();
-        BombExplosionList.add(this);
     }
 
-    public void remove() {
-        Main.ROOT_NODE.detachChild(particle);
-        particle.killAllParticles();
-    }
-
-    public boolean check() {
-        //System.out.println(System.currentTimeMillis() + " " + DURATION + startTime);
-        return System.currentTimeMillis() >= DURATION + startTime;
-    }
 }
