@@ -1,6 +1,8 @@
 package Entities.Player.Enemies;
 
+import com.jme3.bounding.BoundingBox;
 import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 
 public class NormalBot extends Enemy {
@@ -11,6 +13,11 @@ public class NormalBot extends Enemy {
 
     public NormalBot(Vector3f position) {
         super(position, "Models/Monster/spider.obj");
+        spatial.setModelBound(new BoundingBox());
+        Quaternion roll = new Quaternion();
+        roll.fromAngleAxis(FastMath.PI, new Vector3f(0,1,0) );
+        spatial.rotate(roll);
+        spatial.updateModelBound();
         this.direction = FastMath.PI;
     }
 
