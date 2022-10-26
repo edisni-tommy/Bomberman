@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ancient_Portal
+* source:	https://sketchfab.com/3d-models/ancient-portal-b68dceee1b22484ab6ca0207b9e7137a
+* author:	imitate (https://sketchfab.com/imitate)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ancient_Portal" (https://sketchfab.com/3d-models/ancient-portal-b68dceee1b22484ab6ca0207b9e7137a) by imitate (https://sketchfab.com/imitate) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

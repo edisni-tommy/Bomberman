@@ -6,6 +6,7 @@ import Cores.Main;
 import Cores.Map;
 import Entities.BombList;
 import Entities.Player.PlayerList;
+import Entities.Terrain.Portal;
 import Input.PlayerInput;
 import Particles.BombExplosionList;
 import Particles.EffectList;
@@ -71,6 +72,9 @@ public class InGame extends ScenceGraph {
         PlayerList.onUpdate(tpf);
         EffectList.onUpdate(tpf);
         BuffStatus.onUpdate();
+        if (Map.isHasPortal()) {
+            Portal.onUpdate(tpf);
+        }
         remainEnemy.setText("Enemies: " + Map.enemyCount);
     }
 
