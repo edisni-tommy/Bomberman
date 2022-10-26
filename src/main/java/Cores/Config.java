@@ -53,7 +53,7 @@ public class Config {
                     case "[Music_Volume]":
                         setMusic(Integer.parseInt(types[1]));
                         break;
-                    case "[Sound_Volume":
+                    case "[Sound_Volume]":
                         setSound(Integer.parseInt(types[1]));
                         break;
                     case "[Level]":

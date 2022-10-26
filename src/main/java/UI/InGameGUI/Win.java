@@ -53,6 +53,11 @@ public class Win extends ScenceGraph {
                 ScenceGraphController.setScence(new InGame(InGame.getLevel() + 1));
             }
         };
+        if (!Config.isFullScreen()) {
+            nextLevel.getText().setSize(18);
+            playAgain.getText().setSize(18);
+            home.getText().setSize(18);
+        }
         victory.setVolume(Config.getSound());
         victory.setPositional(false);
     }

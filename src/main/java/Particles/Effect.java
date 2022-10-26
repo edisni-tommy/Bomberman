@@ -15,9 +15,12 @@ public class Effect {
 
 
     public void remove() {
-
         Main.ROOT_NODE.detachChild(particle);
         particle.killAllParticles();
+    }
+
+    public void show() {
+
     }
 
     public boolean check() {

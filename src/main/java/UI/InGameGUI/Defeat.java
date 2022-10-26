@@ -46,6 +46,10 @@ public class Defeat extends ScenceGraph {
                 ScenceGraphController.setScence(new InGame(InGame.getLevel()));
             }
         };
+        if (!Config.isFullScreen()) {
+            tryAgain.getText().setSize(18);
+            home.getText().setSize(18);
+        }
         defeat.setVolume(Config.getSound());
         defeat.setPositional(false);
     }

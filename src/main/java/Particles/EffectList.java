@@ -22,13 +22,18 @@ public class EffectList {
 
     public static void onUpdate(float tpf) {
         List<Effect> removeList = new ArrayList<>();
-        for (Effect particle: effects) {
-            if(particle.check()) {
-                removeList.add(particle);
+        for (int i = 0; i < effects.size(); i++) {
+            if(effects.get(i).check()) {
+                //removeList.add(effects.get(i));
+                remove(effects.get(i));
+            } else {
+                if (effects.get(i) instanceof SpeedBuffEffect) {
+                    effects.get(i).show();
+                }
             }
         }
-        for (Effect particle: removeList) {
+        /*for (Effect particle: removeList) {
             remove(particle);
-        }
+        }*/
     }
 }
