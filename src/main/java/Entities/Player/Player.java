@@ -269,4 +269,7 @@ public class Player extends Entity {
     public float getSpeedDuration() {
         return speedBuffDuration;
     }
+    public float getSpeed() {
+        return this.speed;
+    }
 }

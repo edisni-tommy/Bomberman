@@ -1,4 +1,4 @@
-[Screen_Mode]: On
+[Screen_Mode]: Off
 [Music_Volume]: 0
 [Sound_Volume]: 50
 [Level]: 1

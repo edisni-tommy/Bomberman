@@ -11,18 +11,25 @@ import UI.InGameGUI.InGame;
 import UI.InGameGUI.Win;
 import UI.Menu.MainMenu;
 import UI.ScenceGraphController;
+import com.jme3.anim.AnimComposer;
 import com.jme3.audio.AudioData;
 import com.jme3.audio.AudioNode;
 import com.jme3.input.ChaseCamera;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Spatial;
+import utils.AnimUtils;
 
 public class MainPlayer extends Player {
+    private final AnimComposer composer;
     private final static AudioNode BuffItem = new AudioNode(Main.ASSET_MANAGER, "Sounds/Powerup.ogg", AudioData.DataType.Buffer);
 
     public MainPlayer(Vector3f position) {
         super(position, "Models/Player/player.gltf");
+        Spatial child = AnimUtils.getAnimRoot(spatial);
+        composer = child.getControl(AnimComposer.class);
+        composer.setCurrentAction("stand");
         ChaseCamera chaseCam = new ChaseCamera(Main.CAM, spatial, Main.INPUT_MANAGER);
         chaseCam.setDefaultHorizontalRotation(FastMath.PI);
         chaseCam.setDefaultVerticalRotation(FastMath.PI/3);
@@ -38,6 +45,10 @@ public class MainPlayer extends Player {
     public void onUpdate(float tpf) {
         super.onUpdate(tpf);
 
+    }
+
+    public AnimComposer getComposer() {
+        return composer;
     }
 
     @Override

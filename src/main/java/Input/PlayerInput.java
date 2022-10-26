@@ -9,11 +9,14 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.*;
 
+import java.util.HashSet;
+
 
 public class PlayerInput {
 
     private static MainPlayer player;
     private static boolean active;
+    private static final HashSet<String> keys = new HashSet<>();
 
     public static void initialize() {
         player = (MainPlayer)PlayerList.getMainPlayer();
@@ -38,10 +41,21 @@ public class PlayerInput {
             if (keyPressed) {
                 if (s.equals("setBomb")) {
                     player.setBomb();
-                }
-                if (s.equals("setting")) {
+                } else if (s.equals("setting")) {
                     ScenceGraphController.setExtension(new GameSetting());
                 }
+                else {
+                    player.getComposer().setCurrentAction("move");
+                    player.getComposer().setGlobalSpeed(player.getSpeed());
+                }
+                keys.add(s);
+            }
+            else {
+                keys.remove(s);
+                if(keys.size() == 0) {
+                    player.getComposer().setCurrentAction("stand");
+                }
+                //player.getComposer().setGlobalSpeed(player.getSpeed());
             }
         }
     };
