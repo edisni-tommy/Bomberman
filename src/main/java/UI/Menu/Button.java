@@ -7,7 +7,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 
 public class Button extends Image {
-    private Text text;
+    private Text text = null;
     private boolean On = true;
 
     public Button(Vector2f pos, Vector2f size, String path) {
@@ -24,20 +24,20 @@ public class Button extends Image {
     @Override
     public void display() {
         super.display();
-        text.display();
+        if (text != null) text.display();
     }
 
     @Override
     public void remove() {
         super.remove();
-        text.remove();
+        if (text != null) text.remove();
         setOn(false);
     }
 
     @Override
     public void zoomOut() {
         super.zoomOut();
-        text.scale();
+        if (text != null) text.scale();
     }
 
     public void setOn(boolean on) {

@@ -9,9 +9,12 @@ import com.jme3.ui.Picture;
 public class Image {
     private boolean canScale = true;
     private boolean is3D = false;
-    protected final Picture pic;
+    protected Picture pic;
     private final Vector2f pos2D = new Vector2f(0, 0);
     private final Vector2f size = new Vector2f();
+
+    public Image() {
+    }
 
     public Image(Vector2f pos, Vector2f size, String path) {
         pic = new Picture(path);
@@ -20,12 +23,6 @@ public class Image {
         pic.setImage(Main.ASSET_MANAGER, path, true);
     }
 
-    public Image(Vector3f position, Vector2f size, String path) {
-        pic = new Picture(path);
-        pic.setImage(Main.ASSET_MANAGER, path, true);
-        setPos(position);
-        setSize(size);
-    }
     public Image(Vector2f size, String path) {
         pic = new Picture(path);
         setSize(size);
@@ -49,6 +46,7 @@ public class Image {
         pic.setWidth(size.x);
         pic.setHeight(size.y);
     }
+
     public void zoomIn() {
         canScale = false;
         pic.setWidth(getWidth() * Main.SCALEWIDTH);
@@ -68,6 +66,7 @@ public class Image {
         if (Config.isFullScreen()) zoomIn();
 
     }
+
     public float getPosX() {
         return pos2D.x;
     }
@@ -88,8 +87,17 @@ public class Image {
         return pic;
     }
 
+    public void setPic(String path) {
+        Main.GUI_NODE.detachChild(pic);
+        pic = new Picture(path);
+        setPos(pos2D);
+        setSize(size);
+        pic.setImage(Main.ASSET_MANAGER, path, true);
+        Main.GUI_NODE.attachChild(pic);
+    }
+
     public void display() {
-        if (Config.isFullScreen() && canScale){
+        if (Config.isFullScreen() && canScale) {
             zoomIn();
         }
         Main.GUI_NODE.attachChild(pic);

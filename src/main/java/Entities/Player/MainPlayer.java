@@ -23,7 +23,7 @@ import utils.AnimUtils;
 
 public class MainPlayer extends Player {
     private final AnimComposer composer;
-    private final static AudioNode BuffItem = new AudioNode(Main.ASSET_MANAGER, "Sounds/Powerup.ogg", AudioData.DataType.Buffer);
+    public final static AudioNode BuffItem = new AudioNode(Main.ASSET_MANAGER, "Sounds/Powerup.ogg", AudioData.DataType.Buffer);
 
     public MainPlayer(Vector3f position) {
         super(position, "Models/Player/player.gltf");

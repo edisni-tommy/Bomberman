@@ -8,12 +8,10 @@ import com.jme3.font.Rectangle;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 
-import java.util.Vector;
-
 public class Text {
     private final BitmapText hudText;
     private Rectangle box;
-
+    private float textSize;
     private Vector2f size;
 
     public Text(String text, ColorRGBA color, Vector2f pos, Vector2f size) {
@@ -27,24 +25,22 @@ public class Text {
         if (Config.isFullScreen()) {
             scale();
         }
+        textSize = hudText.getSize();
         hudText.setBox(box);
         hudText.setVerticalAlignment(BitmapFont.VAlign.Center);
         hudText.setAlignment(BitmapFont.Align.Center);
     }
 
     public void scale() {
+        scaleTextSize();
         if (Config.isFullScreen()) {
-            hudText.setSize(36);
+            hudText.setSize(textSize);
             box = new Rectangle(box.x * Main.SCALEWIDTH, box.y * Main.SCALEHEIGHT, box.width * Main.SCALEWIDTH, box.height * Main.SCALEHEIGHT);
             hudText.setBox(box);
-            hudText.setVerticalAlignment(BitmapFont.VAlign.Center);
-            hudText.setAlignment(BitmapFont.Align.Center);
         } else {
-            hudText.setSize(26);
+            hudText.setSize(textSize);
             box = new Rectangle(box.x / Main.SCALEWIDTH, box.y / Main.SCALEHEIGHT, box.width / Main.SCALEWIDTH, box.height / Main.SCALEHEIGHT);
             hudText.setBox(box);
-            hudText.setVerticalAlignment(BitmapFont.VAlign.Center);
-            hudText.setAlignment(BitmapFont.Align.Center);
         }
     }
 
@@ -57,6 +53,7 @@ public class Text {
     }
 
     public void setSize(float size) {
+        textSize = size;
         this.hudText.setSize(size);
     }
 
@@ -67,11 +64,49 @@ public class Text {
     public void setAlignment(BitmapFont.Align type) {
         hudText.setAlignment(type);
     }
+
     public float getSize() {
         return this.hudText.getSize();
     }
 
     public void remove() {
         Main.GUI_NODE.detachChild(hudText);
+    }
+
+    public void setColor(ColorRGBA color) {
+        hudText.setColor(color);
+    }
+    public void scaleTextSize() {
+        textSize = hudText.getSize();
+        if (Config.isFullScreen()) {
+            switch ((int) textSize) {
+                case 46:
+                    textSize = 86;
+                    break;
+                case 36:
+                    textSize = 76;
+                    break;
+                case 26:
+                    textSize = 36;
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ((int) textSize) {
+                case 86:
+                    textSize = 46;
+                    break;
+                case 76:
+                    textSize = 36;
+                    break;
+                case 36:
+                    textSize = 26;
+                    break;
+                default:
+                    break;
+            }
+
+        }
     }
 }

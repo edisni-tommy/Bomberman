@@ -24,7 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class InGame extends ScenceGraph {
-    private final static AudioNode music = new AudioNode(Main.ASSET_MANAGER, "Sounds/BGM.wav", AudioData.DataType.Stream);
+    public final static AudioNode music = new AudioNode(Main.ASSET_MANAGER, "Sounds/BGM.wav", AudioData.DataType.Stream);
     private static int level = 1;
 
     private Text curLevel = new Text("Level " + level, ColorRGBA.Black, new Vector2f(20, Main.HEIGHT - 70), new Vector2f(200 , 75));
@@ -45,21 +45,12 @@ public class InGame extends ScenceGraph {
         return level;
     }
 
-    public static void setLevel(int lastLevel) {
-        level = lastLevel;
-    }
-
     public void setDisplayed(boolean displayed) {
         super.setDisplayed(displayed);
         PlayerInput.setActive(displayed);
-        if (!displayed) {
-           music.pause();
-        } else {
-            if (music.getStatus().equals(AudioSource.Status.Paused)) {
-                music.play();
-                curLevel.display();
-                remainEnemy.display();
-            }
+        if (displayed) {
+            curLevel.display();
+            remainEnemy.display();
         }
     }
 
@@ -90,7 +81,7 @@ public class InGame extends ScenceGraph {
         PlayerInput.initialize();
         remainEnemy.display();
         curLevel.display();
-        music.play();
+        if (music.getVolume() > 0) music.play();
     }
 
     @Override
@@ -100,6 +91,7 @@ public class InGame extends ScenceGraph {
         BombExplosionList.removeAll();
         GameEnvironment.remove();
         setDisplayed(false);
+        music.stop();
         curLevel.remove();
         remainEnemy.remove();
         music.stop();
