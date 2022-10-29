@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low Poly Portal
+* source:	https://sketchfab.com/3d-models/low-poly-portal-38e1dec9d32d4a768f8e810848b7b59b
+* author:	N1x (https://sketchfab.com/N1x)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low Poly Portal" (https://sketchfab.com/3d-models/low-poly-portal-38e1dec9d32d4a768f8e810848b7b59b) by N1x (https://sketchfab.com/N1x) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

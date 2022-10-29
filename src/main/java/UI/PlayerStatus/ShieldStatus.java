@@ -9,7 +9,7 @@ import com.jme3.ui.Picture;
 
 public class ShieldStatus extends PlayerStatus {
 
-    private static final Image shield = new Image(new Vector2f(120f, 120f), "Textures/Buffs/shield_active.png");
+    private final Image shield = new Image(new Vector2f(120f, 120f), "Textures/Buffs/shield_active.png");
     private boolean isActive;
 
     public ShieldStatus(Spatial link, boolean isActive) {

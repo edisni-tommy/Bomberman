@@ -13,10 +13,10 @@ public class Portal extends Entity {
     private static Spatial spatial;
 
     public Portal(Vector3f position) {
-        spatial = Main.ASSET_MANAGER.loadModel("Textures/Particles/Portal/scene.gltf");
+        spatial = Main.ASSET_MANAGER.loadModel("Models/Portal/scene.gltf");
         spatial.setLocalTranslation(position);
         Light.setSpatialLight(spatial);
-        spatial.scale(0.005f);
+        spatial.scale(0.2f);
         spatial.setModelBound(new BoundingBox());
         Main.ROOT_NODE.attachChild(spatial);
     }

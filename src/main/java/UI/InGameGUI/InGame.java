@@ -73,7 +73,7 @@ public class InGame extends ScenceGraph {
     public void display() {
         GameEnvironment.initalize();
         try {
-            Map.initalize(level);
+            Map.initialize(level);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

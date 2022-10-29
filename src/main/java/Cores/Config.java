@@ -57,7 +57,9 @@ public class Config {
                         setSound(Integer.parseInt(types[1]));
                         break;
                     case "[Level]":
-                        setLevel(Integer.parseInt(types[1]));
+                        int level = Integer.parseInt(types[1]);
+                        if (level > 30) Map.highestLevel = level;
+                        setLevel(level);
                         break;
                 }
                 line = br.readLine();
