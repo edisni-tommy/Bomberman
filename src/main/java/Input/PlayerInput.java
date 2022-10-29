@@ -47,8 +47,8 @@ public class PlayerInput {
                 else {
                     player.getComposer().setCurrentAction("move");
                     player.getComposer().setGlobalSpeed(player.getSpeed());
+                    keys.add(s);
                 }
-                keys.add(s);
             }
             else {
                 keys.remove(s);
