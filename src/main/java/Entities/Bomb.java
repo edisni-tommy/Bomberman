@@ -75,6 +75,7 @@ public class Bomb extends Entity {
         Map.setObject(x, y, null);
         for (int i = x; i < Math.min(20, x + flame); ++ i) {
             checkKillPlayer(i, y);
+            checkBomb(i, y);
             if (checkExplosion(i, y)) {
                 break;
             }
@@ -82,6 +83,7 @@ public class Bomb extends Entity {
 
         for (int i = x; i > Math.max(-1, x - flame); -- i) {
             checkKillPlayer(i, y);
+            checkBomb(i, y);
             if (checkExplosion(i, y)) {
                 break;
             }
@@ -89,6 +91,7 @@ public class Bomb extends Entity {
 
         for (int i = y; i < Math.min(20, y + flame); ++ i) {
             checkKillPlayer(x, i);
+            checkBomb(x, i);
             if (checkExplosion(x, i)) {
                 break;
             }
@@ -97,6 +100,7 @@ public class Bomb extends Entity {
 
         for (int i = y; i > Math.max(-1, y - flame); -- i) {
             checkKillPlayer(x, i);
+            checkBomb(x, i);
             if (checkExplosion(x, i)) {
                 break;
             }
@@ -105,6 +109,14 @@ public class Bomb extends Entity {
 
     private boolean isColide(float x, float y, float u, float v) {
         return Math.hypot(x - u, y - v) < 1.5f;
+    }
+
+
+    private void checkBomb(int x, int y) {
+        Entity cur = Map.getObject(x, y);
+        if (cur instanceof Bomb) {
+            cur.remove();
+        }
     }
 
     private void checkKillPlayer(int x, int y) {
