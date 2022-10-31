@@ -30,6 +30,7 @@ public class Bomb extends Entity {
     private final int flame;
     private final static AudioNode exploreSound = new AudioNode(Main.ASSET_MANAGER, "Sounds/Explosion.ogg", AudioData.DataType.Buffer);
     private final BombSpark bombSpark;
+    private boolean isExplored = false;
 
 
     public Bomb(Vector3f position, int flame, String path) {
@@ -54,11 +55,12 @@ public class Bomb extends Entity {
     }
 
     public boolean isExplored() {
-        return timeExplore <= 0f;
+        return isExplored || timeExplore <= 0f;
     }
 
     @Override
     public void remove() {
+        isExplored = true;
         explore();
         super.remove();
         bombSpark.remove();
