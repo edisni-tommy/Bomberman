@@ -43,6 +43,7 @@ public class PlayerInput {
                     player.setBomb();
                 } else if (s.equals("setting")) {
                     ScenceGraphController.setExtension(new GameSetting());
+                    player.getComposer().setCurrentAction("stand");
                 }
                 else {
                     player.getComposer().setCurrentAction("move");

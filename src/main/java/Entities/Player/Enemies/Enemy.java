@@ -159,8 +159,7 @@ public class Enemy extends Player {
         if (!Map.valid(x, y)) {
             return false;
         }
-        Entity obj = Map.getObject(x, y);
-        return (obj == null || obj instanceof BuffItem);
+        return !Map.isBlocked(x, y);
     }
 
     private boolean canMoveIn(int x, int y) {
