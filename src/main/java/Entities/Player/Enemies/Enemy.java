@@ -6,6 +6,7 @@ import Entities.Entity;
 import Entities.Player.MainPlayer;
 import Entities.Player.Player;
 import Entities.Player.PlayerList;
+import Entities.Terrain.Portal;
 import UI.InGameGUI.Defeat;
 import UI.InGameGUI.InGame;
 import UI.ScenceGraphController;
@@ -159,7 +160,8 @@ public class Enemy extends Player {
         if (!Map.valid(x, y)) {
             return false;
         }
-        return !Map.isBlocked(x, y);
+        Entity obj = Map.getObject(x, y);
+        return (obj == null || obj instanceof BuffItem || obj instanceof Portal);
     }
 
     private boolean canMoveIn(int x, int y) {
