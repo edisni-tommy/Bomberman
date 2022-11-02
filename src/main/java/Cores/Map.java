@@ -20,7 +20,6 @@ public class Map {
     private static Entity[][] entity;
 
     private static boolean hasPortal;
-
     public static int highestLevel = 30;
     public static int containerCount;
     public static int enemyCount;

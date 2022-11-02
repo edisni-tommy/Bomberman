@@ -10,6 +10,7 @@ import Entities.Terrain.Portal;
 import Input.PlayerInput;
 import Particles.BombExplosionList;
 import Particles.EffectList;
+import UI.Menu.Button;
 import UI.Menu.Text;
 import UI.PlayerStatus.BuffStatus;
 import UI.ScenceGraph;
@@ -27,8 +28,8 @@ public class InGame extends ScenceGraph {
     public final static AudioNode music = new AudioNode(Main.ASSET_MANAGER, "Sounds/BGM.wav", AudioData.DataType.Stream);
     private static int level = 1;
 
-    private Text curLevel = new Text("Level " + level, ColorRGBA.Black, new Vector2f(20, Main.HEIGHT - 70), new Vector2f(200 , 75));
-    private Text remainEnemy = new Text("Enemies: 0", ColorRGBA.Black, new Vector2f(20, Main.HEIGHT - 110), new Vector2f(200, 75));
+    private Button curLevel = new Button(new Vector2f(20, Main.HEIGHT - 50), new Vector2f(100 , 26), "Textures/Menu/announcement_background.png", "Level " + level);
+    private Button remainEnemy = new Button(new Vector2f(20, Main.HEIGHT - 80), new Vector2f(100, 26), "Textures/Menu/announcement_background.png", "Enemies: 0");
 
     public InGame(int level) {
         InGame.level = level;
@@ -36,9 +37,11 @@ public class InGame extends ScenceGraph {
         music.setVolume(Config.getMusic());
         music.setLooping(true);
         music.setPositional(false);
-        curLevel.setText("Level: " + level);
-        curLevel.setAlignment(BitmapFont.Align.Left);
-        remainEnemy.setAlignment(BitmapFont.Align.Left);
+        curLevel.getText().setText("Level: " + level);
+        if (!Config.isFullScreen()) {
+            curLevel.getText().setSize(16f);
+            remainEnemy.getText().setSize(16f);
+        }
     }
 
     public static int getLevel() {
@@ -66,7 +69,7 @@ public class InGame extends ScenceGraph {
         if (Map.isHasPortal()) {
             Portal.onUpdate(tpf);
         }
-        remainEnemy.setText("Enemies: " + Map.enemyCount);
+        remainEnemy.getText().setText("Enemies: " + Map.enemyCount);
     }
 
     @Override

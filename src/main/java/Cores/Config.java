@@ -7,7 +7,7 @@ import java.io.*;
 public class Config {
     private static boolean fullScreen;
     private static int music = 20;
-    private static int sound = 50;
+    private static int sound = 30;
     private static int level;
 
     public static void saveConfig() {

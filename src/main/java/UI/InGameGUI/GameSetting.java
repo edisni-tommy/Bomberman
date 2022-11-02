@@ -60,8 +60,8 @@ public class GameSetting extends ScenceGraph {
                     MainPlayer.BuffItem.setVolume(0);
                     setPic(offPath);
                 } else {
-                    Config.setSound(50);
-                    MainPlayer.BuffItem.setVolume(50);
+                    Config.setSound(1);
+                    MainPlayer.BuffItem.setVolume(1);
                     setPic(onPath);
                 }
                 if (Config.isFullScreen()) super.zoomOut();

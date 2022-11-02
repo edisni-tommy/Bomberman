@@ -75,7 +75,7 @@ public class MenuSetting extends ScenceGraph {
                     Config.setSound(0);
                     setPic(offPath);
                 } else {
-                    Config.setSound(50);
+                    Config.setSound(1);
                     setPic(onPath);
                 }
             }
